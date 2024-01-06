@@ -1,6 +1,10 @@
 package OrderAndChaos;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 //@ExtendWith(MockitoExtension.class)
 public class MakeTurn {
@@ -8,12 +12,35 @@ public class MakeTurn {
   //@Mock
   //private Scanner mockScanner;
 
-  private Game game;
+  Game game;
+  char[][] board;
 
   @BeforeEach
   void setUp() {
     game = new Game();
+    board = new char[6][6];
+    game.initializeBoard(board);
   }
+
+
+  @ParameterizedTest
+  @CsvSource({
+      "1, 2, X",
+      "3, 4, O",
+      "5, 5, X",
+      // Aggiungi altri casi di test come necessario
+  })
+  void makeTurn_ValidInput_UpdatesBoard(int row, int col, char type) {
+    game.makeTurn(board, String.format("%d,%d,%s", row, col, type), true);
+
+    assertEquals(type, board[row][col]);
+    // Assicurati che il metodo isValidMove sia chiamato con gli argomenti corretti
+    // Assicurati che il metodo printBoard sia chiamato con il tuo stato atteso del tavolo
+    // Altri controlli che desideri fare
+  }
+
+
+}
 
 
 
@@ -22,7 +49,14 @@ public class MakeTurn {
 
   /*
 
-
+  @Test
+  void makeTurn_ValidInput_UpdatesBoard() {
+    char[][] board = new char[6][6];
+    when(mockScanner.nextLine()).thenReturn("1,2,X");
+    game.makeTurn(board, mockScanner, true);
+    assertEquals('X', board[1][2]);
+    verify(mockScanner, times(1)).nextLine();
+  }
   @Test
   void makeTurn_ValidInput_UpdatesBoard() {
     char[][] board = new char[6][6];
@@ -50,4 +84,4 @@ public class MakeTurn {
    */
 
 
-}
+

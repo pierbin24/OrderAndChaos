@@ -12,24 +12,26 @@ public class Game {
     System.out.println("Do you wanna play? (y/n)");
     String answer = scanner.nextLine().trim().toLowerCase();
 
+
     if (answer.equals("y")) {
       System.out.println("Who play first? Order or Chaos? (o/c)");
-      boolean turn = game.selectPlayer(scanner);
-      game.newGame(turn, scanner);
+      boolean turn = game.selectPlayer();
+      game.newGame(turn);
 
     } else {
       System.out.println("Sad! See you next time.");
     }
 
     // Chiudi lo scanner per evitare leak di risorse
+
+
     scanner.close();
-
-
   }
 
   //true order/false chaos
-  public boolean selectPlayer(Scanner scanner){
+  public boolean selectPlayer(){
 
+    Scanner scanner = new Scanner(System.in);
     String player = scanner.nextLine().trim().toLowerCase();
     boolean turn = true;
     if(!player.equals("o")){
@@ -37,7 +39,7 @@ public class Game {
         turn = false;
       }else{
         System.out.println("There is a typo, answer with a 'o' for Order o 'c' for Chaos");
-        selectPlayer(scanner);
+        selectPlayer();
       }
     }
     System.out.println(turn);
@@ -45,18 +47,27 @@ public class Game {
   }
 
 
-  public void newGame(boolean turn, Scanner scanner){
+  public void newGame(boolean turn){
+
 
     System.out.println("Inizia una nuova partita!");
     char[][] board = new char[6][6];
     initializeBoard(board);
     printBoard(board);
-    System.out.println("It's " + turn + " turn");
-    makeTurn(board, scanner, turn);
+    if(turn){
+      System.out.println("It's Order's turn");
+    }else{
+      System.out.println("It's Chaos' turn");
+    }
+
+    Scanner scanner = new Scanner(System.in);
+    System.out.println("Make a move! (row, column, type)");
+    String input = scanner.nextLine();
+    makeTurn(board, input, turn);
   }
 
 
-  private void initializeBoard(char[][] board) {
+  public void initializeBoard(char[][] board) {
     for (int i = 0; i < 6; i++) {
       for (int j = 0; j < 6; j++) {
         board[i][j] = ' ' ;
@@ -75,16 +86,8 @@ public class Game {
     }
   }
 
-  public void makeTurn(char[][] board, Scanner scanner, boolean turn){
-    if(turn){
-      System.out.println("It's Order's turn");
-    }else{
-      System.out.println("It's Chaos' turn");
-    }
-    System.out.println("Make a move! (row, column, type)");
+  public void makeTurn(char[][] board, String input, boolean turn){
 
-    // Leggi l'input come una singola stringa
-    String input = scanner.nextLine();
     // Separazione della stringa nelle tre componenti
     String[] components = input.split("\\s*,\\s*");
     // Verifica che ci siano esattamente tre componenti
