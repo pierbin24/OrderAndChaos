@@ -63,7 +63,7 @@ public class Game {
     Scanner scanner = new Scanner(System.in);
     System.out.println("Make a move! (row, column, type)");
     String input = scanner.nextLine();
-    makeTurn(board, input, turn);
+    makeTurn(board, input);
   }
 
 
@@ -86,7 +86,7 @@ public class Game {
     }
   }
 
-  public void makeTurn(char[][] board, String input, boolean turn){
+  public void makeTurn(char[][] board, String input){
 
     // Separazione della stringa nelle tre componenti
     String[] components = input.split("\\s*,\\s*");

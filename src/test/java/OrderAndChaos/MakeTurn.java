@@ -4,6 +4,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 //@ExtendWith(MockitoExtension.class)
@@ -30,13 +31,30 @@ public class MakeTurn {
       "5, 5, X",
       // Aggiungi altri casi di test come necessario
   })
-  void makeTurn_ValidInput_UpdatesBoard(int row, int col, char type) {
-    game.makeTurn(board, String.format("%d,%d,%s", row, col, type), true);
+  void makeTurn_ValidInput(int row, int col, char type) {
+    game.makeTurn(board, String.format("%d,%d,%s", row, col, type));
 
     assertEquals(type, board[row][col]);
     // Assicurati che il metodo isValidMove sia chiamato con gli argomenti corretti
     // Assicurati che il metodo printBoard sia chiamato con il tuo stato atteso del tavolo
     // Altri controlli che desideri fare
+  }
+
+  @ParameterizedTest
+  @CsvSource({
+      "invalid input",
+      "7, 8",
+      "X, 2, 3",
+      "0, 6, X"
+  })
+  void makeTurn_InvalidInput(String input) {
+
+    game.makeTurn(board, input);
+
+    // Verifica che la matrice board sia rimasta invariata (nessun aggiornamento)
+    char[][] expectedBoard = new char[6][6];
+    game.initializeBoard(expectedBoard);
+    assertArrayEquals(expectedBoard, board);
   }
 
 
