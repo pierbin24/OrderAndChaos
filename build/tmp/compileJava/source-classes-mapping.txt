@@ -1,2 +1,0 @@
-OrderAndChaos/Game.java
- OrderAndChaos.Game
