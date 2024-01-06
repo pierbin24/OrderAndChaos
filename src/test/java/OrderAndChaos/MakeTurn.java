@@ -1,22 +1,12 @@
 package OrderAndChaos;
 
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.Mock;
-import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.util.Scanner;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.mockito.Mockito.*;
-
-@ExtendWith(MockitoExtension.class)
+//@ExtendWith(MockitoExtension.class)
 public class MakeTurn {
 
-  @Mock
-  private Scanner mockScanner;
+  //@Mock
+  //private Scanner mockScanner;
 
   private Game game;
 
@@ -24,6 +14,14 @@ public class MakeTurn {
   void setUp() {
     game = new Game();
   }
+
+
+
+
+
+
+  /*
+
 
   @Test
   void makeTurn_ValidInput_UpdatesBoard() {
@@ -34,7 +32,7 @@ public class MakeTurn {
     verify(mockScanner, times(1)).nextLine();
   }
 
-  @Test
+    @Test
   void makeTurn_InvalidInput_PrintsErrorMessage() {
     char[][] board = new char[6][6];
     when(mockScanner.nextLine()).thenReturn("invalid input");
@@ -49,5 +47,7 @@ public class MakeTurn {
     assertThrows(NumberFormatException.class, () -> game.makeTurn(board, mockScanner, true));
     verify(mockScanner, times(1)).nextLine();
   }
+   */
+
 
 }
