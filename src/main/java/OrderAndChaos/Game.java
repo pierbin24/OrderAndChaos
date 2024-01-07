@@ -138,6 +138,7 @@ public class Game {
   public void checkWin(){
 
     checkRow();
+    checkColumn();
 
 
   }
@@ -152,7 +153,7 @@ public class Game {
       // Scorrere ogni colonna (partendo dalla seconda colonna)
       for (int j = 1; j < cols; j++) {
         // escludo il controllo se arrivo alla terza colonna con tre simboli diversi
-        if(!(j == 4 && straightSymbolCounter < 2)){
+        if(!(j >= 4 && straightSymbolCounter < 2)){
           // Controllare se il simbolo corrente è uguale a quello nella colonna precedente
           if ((board[i][j] == board[i][j - 1]) && (board[i][j] != ' ')) {
             straightSymbolCounter++;
@@ -171,6 +172,34 @@ public class Game {
     }
 
   }
-  public void checkColumn(){}
+  public void checkColumn(){
+
+    int rows = board.length;
+    int cols = board[0].length;
+
+    for (int j = 0; j < cols; j++){
+      int straightSymbolCounter = 1;
+
+      // Scorrere ogni colonna (partendo dalla seconda colonna)
+      for (int i = 1; i < rows; i++) {
+        // escludo il controllo se arrivo alla terza colonna con tre simboli diversi
+        if(!(i >= 4 && straightSymbolCounter < 2)){
+          // Controllare se il simbolo corrente è uguale a quello nella colonna precedente
+          if ((board[i][j] == board[i-1][j]) && (board[i][j] != ' ')) {
+            straightSymbolCounter++;
+            System.out.println(straightSymbolCounter);
+
+            // Se abbiamo 5 simboli consecutivi, restituire true
+            if (straightSymbolCounter == 5) {
+              win = true;
+            }
+          } else {
+            // Se i simboli non sono uguali, riavviare il contatore
+            straightSymbolCounter = 1;
+          }
+        }
+      }
+    }
+  }
 
 }
