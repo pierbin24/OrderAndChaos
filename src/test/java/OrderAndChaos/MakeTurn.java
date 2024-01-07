@@ -32,7 +32,7 @@ public class MakeTurn {
       // Aggiungi altri casi di test come necessario
   })
   void makeTurn_ValidInput(int row, int col, char type) {
-    game.makeTurn(board, String.format("%d,%d,%s", row, col, type));
+    game.makeTurn(board, String.format("%d,%d,%s", row, col, type), true);
 
     assertEquals(type, board[row][col]);
     // Assicurati che il metodo isValidMove sia chiamato con gli argomenti corretti
@@ -49,7 +49,7 @@ public class MakeTurn {
   })
   void makeTurn_InvalidInput(String input) {
 
-    game.makeTurn(board, input);
+    game.makeTurn(board, input, true);
 
     // Verifica che la matrice board sia rimasta invariata (nessun aggiornamento)
     char[][] expectedBoard = new char[6][6];
