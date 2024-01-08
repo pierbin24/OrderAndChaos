@@ -12,24 +12,34 @@ public class Game {
     Game game = new Game();
 
     Scanner scanner = new Scanner(System.in);
-    System.out.println("Do you wanna play? (y/n)");
+    System.out.println("Do you know how to play? (y/-)");
     String answer = scanner.nextLine().trim().toLowerCase();
 
-
     if (answer.equals("y")) {
-      System.out.println("Who play first? Order or Chaos? (o/c)");
-      turn = game.selectPlayer();
+      //System.out.println("Who play first? Order or Chaos? (o/c)");
+      //turn = game.selectPlayer();
       game.newGame();
 
     } else {
-      System.out.println("Sad! See you next time.");
+      System.out.println("""
+          Don't worry, it's simple! It's like tic-tac-toe but with a 6x6 board and two player: ORDER and CHAOS.\s
+          Both player can write down X or O. Order's goal is to make a 5 straight symbols horizontally, vertically or diagonally.\s
+          On the contrary Chaos to win has to avoid at any costs.\s""");
+      System.out.println("So, now do you wanna play? (y/n)");
+      answer = scanner.nextLine().trim().toLowerCase();
+      if(answer.equals("y")){
+        game.newGame();
+      }else{
+        System.out.println("Sad! See you next time, maybe");
+      }
     }
 
     scanner.close();
   }
 
   //player selection
-  public boolean selectPlayer(){
+  /*
+    public boolean selectPlayer(){
 
     Scanner scanner = new Scanner(System.in);
     String player = scanner.nextLine().trim().toLowerCase();
@@ -44,11 +54,13 @@ public class Game {
     }
     return turn;
   }
+   */
+
 
 
   public void newGame(){
 
-    System.out.println("Inizia una nuova partita!");
+    System.out.println("Great! Have a good game");
 
     //board initialization
     initializeBoard(board);
@@ -150,6 +162,49 @@ public class Game {
     int length = board.length;
     for (int i = 0; i < length; i++){
       int straightSymbolCounter = 1;
+      for (int j = 1; j < length; j++) {
+        if ((board[i][j] == board[i][j - 1]) && (board[i][j] != ' ')) {
+          straightSymbolCounter++;
+          if (straightSymbolCounter == 5) {
+            return true;
+          }
+        } else {
+          straightSymbolCounter = 1;
+        }
+      }
+    }
+    return false;
+  }
+
+  //check every col for 5 straight symbols
+  public boolean checkCol(){
+
+    int length = board.length;
+    for (int j = 0; j < length; j++){
+      int straightSymbolCounter = 1;
+      for (int i = 1; i < length; i++) {
+        if ((board[i][j] == board[i-1][j]) && (board[i][j] != ' ')) {
+          straightSymbolCounter++;
+          if (straightSymbolCounter == 5) {
+            return true;
+          }
+        } else {
+          straightSymbolCounter = 1;
+        }
+      }
+    }
+    return false;
+
+  }
+
+  //old version of checkrow/col
+  /*
+    // check every row for 5 straight symbols
+  public boolean checkRow(){
+
+    int length = board.length;
+    for (int i = 0; i < length; i++){
+      int straightSymbolCounter = 1;
 
       for (int j = 1; j < length; j++) {
         if((j >= 4 && straightSymbolCounter < 2)){
@@ -194,6 +249,7 @@ public class Game {
     return false;
 
   }
+   */
 
 
   //to check che diagonal use two methods, the first for the for the main diagonal and the two secondary diagonals
