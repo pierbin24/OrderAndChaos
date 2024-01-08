@@ -25,11 +25,10 @@ public class Game {
       System.out.println("Sad! See you next time.");
     }
 
-    // Chiudi lo scanner per evitare leak di risorse
     scanner.close();
   }
 
-  //true order/false chaos
+  //player selection
   public boolean selectPlayer(){
 
     Scanner scanner = new Scanner(System.in);
@@ -51,11 +50,11 @@ public class Game {
 
     System.out.println("Inizia una nuova partita!");
 
+    //board initialization
     initializeBoard(board);
-    //printBoard(board);
 
+    //check if order win
     while(!checkWin()){
-      System.out.println("sono qui "+ turn);
       if(turn){
         System.out.println("It's Order's turn");
       }else{
@@ -69,8 +68,7 @@ public class Game {
 
   }
 
-
-
+  //board initialization
   public void initializeBoard(char[][] board) {
     for (int i = 0; i < 6; i++) {
       for (int j = 0; j < 6; j++) {
@@ -90,25 +88,21 @@ public class Game {
     }
   }
 
+  //turn
   public void makeTurn(char[][] board, String input){
 
-    // Separazione della stringa nelle tre componenti
     String[] components = input.split("\\s*,\\s*");
-    // Verifica che ci siano esattamente tre componenti
     if (components.length == 3) {
       try {
-        // Estrai i valori dalla stringa
         int row = Integer.parseInt(components[0]);
         int col = Integer.parseInt(components[1]);
         char type = components[2].toUpperCase().charAt(0);
 
-        // Verifica che i valori siano validi
+        //check if the move is valid
         if (isValidMove(board, row, col, type)) {
           board[row][col] = type;
           printBoard(board);
-          System.out.println(turn);
           turn = !turn;
-          System.out.println(turn);
         } else {
           System.out.println("Input non valido. Assicurati di inserire valori corretti.");
         }
@@ -121,10 +115,9 @@ public class Game {
 
   }
 
+  //check if the coordinates are ok, the cell is empty and the symbol correct
   private static boolean isValidMove(char[][] board, int row, int col, char type) {
-    // Aggiungi eventuali regole di validità qui
-    // Ad esempio, controlla se row e col sono nell'intervallo desiderato,
-    // e se type è "X" o "O"
+
     boolean isValid = row >= 0 && row < 6 && col >= 0 && col < 6 && (type == 'X' || type == 'O');
     if(isValid){
       if(board[row][col] != ' '){
@@ -132,8 +125,10 @@ public class Game {
       }
     }
     return isValid;
+
   }
 
+  //check if the are five straight symbols for row, col and diag
   public boolean checkWin(){
 
     if(checkRow()){
@@ -142,41 +137,31 @@ public class Game {
     if(checkCol()){
       return true;
     }
-
     if(checkDiag()){
       return true;
     }
-
     return false;
-
 
   }
 
+  // check every row for 5 straight symbols
   public boolean checkRow(){
 
-    int rows = board.length;
-    int cols = board[0].length;
-    for (int i = 0; i < rows; i++){
+    int length = board.length;
+    for (int i = 0; i < length; i++){
       int straightSymbolCounter = 1;
 
-      // Scorrere ogni colonna (partendo dalla seconda colonna)
-      for (int j = 1; j < cols; j++) {
-        // escludo il controllo se arrivo alla terza colonna con tre simboli diversi
+      for (int j = 1; j < length; j++) {
         if((j >= 4 && straightSymbolCounter < 2)){
           return false;
         }else{
-          // Controllare se il simbolo corrente è uguale a quello nella colonna precedente
           if ((board[i][j] == board[i][j - 1]) && (board[i][j] != ' ')) {
             straightSymbolCounter++;
             System.out.println(straightSymbolCounter);
-
-            // Se abbiamo 5 simboli consecutivi, restituire true
             if (straightSymbolCounter == 5) {
               return true;
-              //win = true;
             }
           } else {
-            // Se i simboli non sono uguali, riavviare il contatore
             straightSymbolCounter = 1;
           }
         }
@@ -185,74 +170,63 @@ public class Game {
     return false;
   }
 
+  //check every col for 5 straight symbols
   public boolean checkCol(){
 
-    int rows = board.length;
-    int cols = board[0].length;
-
-    for (int j = 0; j < cols; j++){
+    int length = board.length;
+    for (int j = 0; j < length; j++){
       int straightSymbolCounter = 1;
-
-      // Scorrere ogni colonna (partendo dalla seconda colonna)
-      for (int i = 1; i < rows; i++) {
-        // escludo il controllo se arrivo alla terza colonna con tre simboli diversi
+      for (int i = 1; i < length; i++) {
         if((i >= 4 && straightSymbolCounter < 2)){
           return false;
         }else{
-          // Controllare se il simbolo corrente è uguale a quello nella colonna precedente
           if ((board[i][j] == board[i-1][j]) && (board[i][j] != ' ')) {
             straightSymbolCounter++;
-            System.out.println(straightSymbolCounter);
-
-            // Se abbiamo 5 simboli consecutivi, restituire true
             if (straightSymbolCounter == 5) {
               return true;
             }
           } else {
-            // Se i simboli non sono uguali, riavviare il contatore
             straightSymbolCounter = 1;
           }
         }
       }
     }
     return false;
+
   }
 
 
+  //to check che diagonal use two methods, the first for the for the main diagonal and the two secondary diagonals
+  //that check from up left to down right, the second one for the same but opposite diagonals
   private boolean checkDiag() {
-    int rows = board.length;
-    int cols = board[0].length;
+    int length = board.length;
 
-
-    if(checkDiag1(1,1,rows)){
+    if(checkDiag1(1,1,length)){
       return true;
     }
-    if(checkDiag1(1,2,rows)){
+    if(checkDiag1(1,2,length)){
       return true;
     }
-    if(checkDiag1(2,1,rows)){
+    if(checkDiag1(2,1,length)){
       return true;
     }
-    if(checkDiag2(1,4,rows)){
+    if(checkDiag2(1,4,length)){
       return true;
     }
-    if(checkDiag2(1,3,rows)){
+    if(checkDiag2(1,3,length)){
       return true;
     }
-    if(checkDiag2(2,4,rows)){
+    if(checkDiag2(2,4,length)){
       return true;
     }
 
-      // Nessuna diagonale principale con 5 simboli consecutivi trovata
       return false;
     }
 
 
-    public boolean checkDiag1(int indexR, int indexC, int length){
+  public boolean checkDiag1(int indexR, int indexC, int length){
 
       int straightSymbolCounter = 1;
-
-      //main diag from left up to down right
       for (int i = indexR, j = indexC; i < length && j < length; i++, j++) {
           if (board[i][j] == ' ') {
             straightSymbolCounter = 1;
@@ -267,15 +241,12 @@ public class Game {
             }
           }
       }
-
     return false;
     }
 
   public boolean checkDiag2(int indexR, int indexC, int length){
 
     int straightSymbolCounter = 1;
-
-    //main diag from left up to down right
     for (int i = indexR, j = indexC; i < length && j > 0; i++, j--) {
       if (board[i][j] == ' ') {
         straightSymbolCounter = 1;
@@ -290,9 +261,9 @@ public class Game {
         }
       }
     }
-
     return false;
   }
+
 
 }
 
