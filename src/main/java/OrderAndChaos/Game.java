@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class Game {
 
-  public boolean win = false;
+  private static boolean turn = true;
   public char[][] board = new char[6][6];
 
   public static void main(String... args) {
@@ -18,8 +18,8 @@ public class Game {
 
     if (answer.equals("y")) {
       System.out.println("Who play first? Order or Chaos? (o/c)");
-      boolean turn = game.selectPlayer();
-      game.newGame(turn);
+      turn = game.selectPlayer();
+      game.newGame();
 
     } else {
       System.out.println("Sad! See you next time.");
@@ -43,19 +43,19 @@ public class Game {
         selectPlayer();
       }
     }
-    System.out.println(turn);
     return turn;
   }
 
 
-  public void newGame(boolean turn){
+  public void newGame(){
 
     System.out.println("Inizia una nuova partita!");
 
     initializeBoard(board);
     //printBoard(board);
 
-    while(!win){
+    while(!checkWin()){
+      System.out.println("sono qui "+ turn);
       if(turn){
         System.out.println("It's Order's turn");
       }else{
@@ -64,8 +64,7 @@ public class Game {
       Scanner scanner = new Scanner(System.in);
       System.out.println("Make a move! (row, column, type)");
       String input = scanner.nextLine();
-      makeTurn(board, input, turn);
-      checkWin();
+      makeTurn(board, input);
     }
 
   }
@@ -91,7 +90,7 @@ public class Game {
     }
   }
 
-  public void makeTurn(char[][] board, String input, boolean turn){
+  public void makeTurn(char[][] board, String input){
 
     // Separazione della stringa nelle tre componenti
     String[] components = input.split("\\s*,\\s*");
@@ -135,15 +134,25 @@ public class Game {
     return isValid;
   }
 
-  public void checkWin(){
+  public boolean checkWin(){
 
-    checkRow();
-    checkColumn();
+    if(checkRow()){
+      return true;
+    }
+    if(checkCol()){
+      return true;
+    }
+
+    if(checkDiag()){
+      return true;
+    }
+
+    return false;
 
 
   }
 
-  public void checkRow(){
+  public boolean checkRow(){
 
     int rows = board.length;
     int cols = board[0].length;
@@ -153,7 +162,9 @@ public class Game {
       // Scorrere ogni colonna (partendo dalla seconda colonna)
       for (int j = 1; j < cols; j++) {
         // escludo il controllo se arrivo alla terza colonna con tre simboli diversi
-        if(!(j >= 4 && straightSymbolCounter < 2)){
+        if((j >= 4 && straightSymbolCounter < 2)){
+          return false;
+        }else{
           // Controllare se il simbolo corrente è uguale a quello nella colonna precedente
           if ((board[i][j] == board[i][j - 1]) && (board[i][j] != ' ')) {
             straightSymbolCounter++;
@@ -161,7 +172,8 @@ public class Game {
 
             // Se abbiamo 5 simboli consecutivi, restituire true
             if (straightSymbolCounter == 5) {
-              win = true;
+              return true;
+              //win = true;
             }
           } else {
             // Se i simboli non sono uguali, riavviare il contatore
@@ -170,9 +182,10 @@ public class Game {
         }
       }
     }
-
+    return false;
   }
-  public void checkColumn(){
+
+  public boolean checkCol(){
 
     int rows = board.length;
     int cols = board[0].length;
@@ -183,7 +196,9 @@ public class Game {
       // Scorrere ogni colonna (partendo dalla seconda colonna)
       for (int i = 1; i < rows; i++) {
         // escludo il controllo se arrivo alla terza colonna con tre simboli diversi
-        if(!(i >= 4 && straightSymbolCounter < 2)){
+        if((i >= 4 && straightSymbolCounter < 2)){
+          return false;
+        }else{
           // Controllare se il simbolo corrente è uguale a quello nella colonna precedente
           if ((board[i][j] == board[i-1][j]) && (board[i][j] != ' ')) {
             straightSymbolCounter++;
@@ -191,7 +206,7 @@ public class Game {
 
             // Se abbiamo 5 simboli consecutivi, restituire true
             if (straightSymbolCounter == 5) {
-              win = true;
+              return true;
             }
           } else {
             // Se i simboli non sono uguali, riavviare il contatore
@@ -200,6 +215,86 @@ public class Game {
         }
       }
     }
+    return false;
+  }
+
+
+  private boolean checkDiag() {
+    int rows = board.length;
+    int cols = board[0].length;
+
+
+    if(checkDiag1(1,1,rows)){
+      return true;
+    }
+    if(checkDiag1(1,2,rows)){
+      return true;
+    }
+    if(checkDiag1(2,1,rows)){
+      return true;
+    }
+    if(checkDiag2(1,4,rows)){
+      return true;
+    }
+    if(checkDiag2(1,3,rows)){
+      return true;
+    }
+    if(checkDiag2(2,4,rows)){
+      return true;
+    }
+
+      // Nessuna diagonale principale con 5 simboli consecutivi trovata
+      return false;
+    }
+
+
+    public boolean checkDiag1(int indexR, int indexC, int length){
+
+      int straightSymbolCounter = 1;
+
+      //main diag from left up to down right
+      for (int i = indexR, j = indexC; i < length && j < length; i++, j++) {
+          if (board[i][j] == ' ') {
+            straightSymbolCounter = 1;
+          } else {
+            if (board[i][j] == board[i - 1][j - 1]) {
+              straightSymbolCounter++;
+              if (straightSymbolCounter == 5) {
+                return true;
+              }
+            } else {
+              straightSymbolCounter = 1;
+            }
+          }
+      }
+
+    return false;
+    }
+
+  public boolean checkDiag2(int indexR, int indexC, int length){
+
+    int straightSymbolCounter = 1;
+
+    //main diag from left up to down right
+    for (int i = indexR, j = indexC; i < length && j > 0; i++, j--) {
+      if (board[i][j] == ' ') {
+        straightSymbolCounter = 1;
+      } else {
+        if (board[i][j] == board[i - 1][j + 1]) {
+          straightSymbolCounter++;
+          if (straightSymbolCounter == 5) {
+            return true;
+          }
+        } else {
+          straightSymbolCounter = 1;
+        }
+      }
+    }
+
+    return false;
   }
 
 }
+
+
+
