@@ -1,15 +1,22 @@
 package OrderAndChaos;
 
+import java.util.Random;
 import java.util.Scanner;
 
 public class Game {
 
-  private static boolean turn = true;
+  //false - chaos / true - order
+  private static boolean player = false;
   public char[][] board = new char[6][6];
+  private static int freeSpace = 36;
 
   public static void main(String... args) {
 
     Game game = new Game();
+
+    //chaos test
+    //fillBoard(game.board);
+    //game.printBoard(game.board);
 
     Scanner scanner = new Scanner(System.in);
     System.out.println("Do you know how to play? (y/-)");
@@ -64,19 +71,29 @@ public class Game {
 
     //board initialization
     initializeBoard(board);
-
+    player = !player;
     //check if order win
-    while(!checkWin()){
-      if(turn){
+    while(!checkWin() && freeSpace > 0){
+      if(player){
         System.out.println("It's Order's turn");
       }else{
         System.out.println("It's Chaos' turn");
       }
       Scanner scanner = new Scanner(System.in);
-      System.out.println("Make a move! (row, column, type)");
+      System.out.println("Make a move!");
+      System.out.println("[Row,Col,Type]");
       String input = scanner.nextLine();
       makeTurn(board, input);
     }
+
+    String winner;
+    if(player){
+      winner = "ORDER";
+    }else{
+      winner = "CHAOS";
+    }
+
+    endGame(winner);
 
   }
 
@@ -114,15 +131,19 @@ public class Game {
         if (isValidMove(board, row, col, type)) {
           board[row][col] = type;
           printBoard(board);
-          turn = !turn;
+          player = !player;
+          freeSpace--;
         } else {
-          System.out.println("Input non valido. Assicurati di inserire valori corretti.");
+          System.out.println("Invalid input. Be sure to enter correct values.");
         }
       } catch (NumberFormatException e) {
-        System.out.println("Errore durante la conversione di numeri.");
+        System.out.println("Error during number conversion.");
       }
     } else {
-      System.out.println("Input non valido. Assicurati di inserire tre componenti separate da virgola.");
+      System.out.println("""
+          Invalid input. Be sure to enter three comma-separated components.\s
+          The first two number for row and column (from 0 to 5) and third the symbol.
+          Here an example [2,3,x]""");
     }
 
   }
@@ -144,14 +165,19 @@ public class Game {
   public boolean checkWin(){
 
     if(checkRow()){
+      player = true;
       return true;
     }
     if(checkCol()){
+      player = true;
       return true;
     }
     if(checkDiag()){
+      player = true;
       return true;
     }
+
+    player = false;
     return false;
 
   }
@@ -197,7 +223,7 @@ public class Game {
 
   }
 
-  //old version of checkrow/col
+  //old version of checkRow/col
   /*
     // check every row for 5 straight symbols
   public boolean checkRow(){
@@ -320,6 +346,40 @@ public class Game {
     return false;
   }
 
+  public void endGame(String winner){
+
+    Random random = new Random();
+    int numb = random.nextInt(5) + 1;
+
+
+    switch (numb) {
+      case 1 -> System.out.println("Wow, that was truly a wild game, but in the end, " + winner + " emerged victorious!.");
+      case 2 -> System.out.println("What an incredible match! Eventually, " + winner + " triumphed in a surprising turn of events.");
+      case 3 -> System.out.println("A truly breathtaking game, but in the end, it was " + winner + " who secured the victory.");
+      case 4 -> System.out.println("I just witnessed an epic match, and fortunately, " + winner + " managed to come out on top.");
+      case 5 -> System.out.println("It was a thrilling game, but " + winner + " showcased their skill and won decisively.");
+    }
+
+  }
+
+  private static void fillBoard(char[][] table) {
+    char[][] pattern = {
+        {'O', 'O', 'X', 'X', 'O', 'O'},
+        {'X', 'X', 'O', 'O', 'X', 'X'},
+        {'O', 'O', 'X', 'X', 'O', 'O'},
+        {'X', 'X', 'O', 'O', 'X', 'X'},
+        {'O', 'O', 'X', 'X', 'O', 'O'},
+        {'X', 'X', 'O', 'O', 'X', 'X'}
+    };
+
+    for (int i = 0; i < table.length; i++) {
+      for (int j = 0; j < table[i].length; j++) {
+        table[i][j] = pattern[i % pattern.length][j % pattern[i].length];
+        freeSpace--;
+        System.out.println(freeSpace);
+      }
+    }
+  }
 
 }
 
