@@ -3,17 +3,16 @@ package OrderAndChaos;
 import java.util.Random;
 import java.util.Scanner;
 
-public class Game {
+public class GameSafe {
 
   //false - chaos / true - order
   private static boolean player = false;
   public char[][] board = new char[6][6];
-  public int freeSpace = 36;
+  private static int freeSpace = 36;
 
-  /*
-    public static void main(String... args) {
+  public static void main(String... args) {
 
-    Game game = new Game();
+    GameSafe game = new GameSafe();
 
     //chaos test
     //fillBoard(game.board);
@@ -45,8 +44,6 @@ public class Game {
     scanner.close();
   }
 
-   */
-
   //player selection
   /*
     public boolean selectPlayer(){
@@ -64,45 +61,7 @@ public class Game {
     }
     return turn;
   }
-
-    public char[][] getBoard() {
-    return board;
-  }
-
-  public boolean isCellFree(int i, int j){
-
-    if(board[i][j] == ' '){
-      return true;
-    }
-
-    return false;
-  }
-
-  public void fillCell(int i, int j, char symbol){
-    board[i][j] = symbol;
-  }
-
-  public void setSymbol(int i, int j, char symbol) {
-    // Puoi inserire qui la logica necessaria per gestire la selezione del simbolo
-    // Ad esempio, potresti voler verificare se la cella è vuota prima di impostare il simbolo
-    // Presumo che tu abbia una variabile 'board' che rappresenta il tuo campo di gioco
-
-    int row = i;  // Dovrai implementare il metodo getSelectedRow()
-    int col = j;  // Dovrai implementare il metodo getSelectedCol()
-
-    // Verifica se la cella è vuota prima di impostare il simbolo
-
-      board[row][col] = symbol;
-      // Altri aggiornamenti o logiche se necessario...
-
-  }
-
    */
-
-
-
-
-
 
 
 
@@ -370,7 +329,7 @@ public class Game {
   public boolean checkDiag2(int indexR, int indexC, int length){
 
     int straightSymbolCounter = 1;
-    for (int i = indexR, j = indexC; i < length && j >= 0; i++, j--) {
+    for (int i = indexR, j = indexC; i < length && j > 0; i++, j--) {
       if (board[i][j] == ' ') {
         straightSymbolCounter = 1;
       } else {
@@ -416,8 +375,8 @@ public class Game {
     for (int i = 0; i < table.length; i++) {
       for (int j = 0; j < table[i].length; j++) {
         table[i][j] = pattern[i % pattern.length][j % pattern[i].length];
-        //freeSpace--;
-        //System.out.println(freeSpace);
+        freeSpace--;
+        System.out.println(freeSpace);
       }
     }
   }
