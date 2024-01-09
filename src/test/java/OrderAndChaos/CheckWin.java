@@ -1,7 +1,63 @@
 package OrderAndChaos;
 
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+public class CheckWin {
+
+  Game game;
+  char[][] board;
+
+  @BeforeEach
+  void setUp() {
+    game = new Game();
+    board = new char[6][6];
+  }
+
+
+
+  @Test
+  public void testCheckRow() {
+
+    game.board = new char[][]{
+        {' ', ' ', ' ', ' ', ' ', ' '},
+        {' ', ' ', ' ', ' ', ' ', ' '},
+        {' ', 'X', 'X', 'X', 'X', 'X'},
+        {' ', ' ', ' ', ' ', ' ', ' '},
+        {' ', ' ', ' ', ' ', ' ', ' '},
+        {' ', ' ', ' ', ' ', ' ', ' '}
+    };
+
+    assertTrue(game.checkRow());
+  }
+
+  @Test
+  public void testCheckCol() {
+
+    game.board = new char[][]{
+        {' ', 'X', ' ', ' ', ' ', ' '},
+        {' ', 'X', ' ', ' ', ' ', ' '},
+        {' ', 'X', ' ', ' ', ' ', ' '},
+        {' ', 'X', ' ', ' ', ' ', ' '},
+        {' ', 'X', ' ', ' ', ' ', ' '},
+        {' ', 'X', ' ', ' ', ' ', ' '}
+    };
+
+    assertTrue(game.checkCol());
+  }
+
+
+
+
+
+}
+
+
+
 //@ExtendWith(MockitoExtension.class)
-public class MakeTurn {
+
 
   //@Mock
   //private Scanner mockScanner;
@@ -57,7 +113,7 @@ public class MakeTurn {
 
 
 
-}
+
 
 
 
@@ -99,6 +155,3 @@ public class MakeTurn {
     verify(mockScanner, times(1)).nextLine();
   }
    */
-
-
-
