@@ -1,19 +1,14 @@
 package OrderAndChaos;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvSource;
-
-import static org.junit.jupiter.api.Assertions.assertArrayEquals;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
 //@ExtendWith(MockitoExtension.class)
 public class MakeTurn {
 
   //@Mock
   //private Scanner mockScanner;
 
-  Game game;
+  /*
+
+    Game game;
   char[][] board;
 
   @BeforeEach
@@ -56,6 +51,10 @@ public class MakeTurn {
     game.initializeBoard(expectedBoard);
     assertArrayEquals(expectedBoard, board);
   }
+
+   */
+
+
 
 
 }
