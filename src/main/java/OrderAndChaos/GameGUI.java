@@ -9,8 +9,8 @@ import java.awt.event.ActionListener;
 
 public class GameGUI extends JFrame {
 
-  private JButton[][] buttons;
-  private Game game;
+  private final JButton[][] buttons;
+  private final Game game;
   boolean player = true;
 
 
@@ -21,12 +21,10 @@ public class GameGUI extends JFrame {
     setLocationRelativeTo(null);
 
     buttons = new JButton[6][6];
-    //board = new char[6][6];
     game = new Game();
 
     initializeButtons();
-    initializeBottomPanel();  // Nuovo metodo per inizializzare i bottoni "New Game" e "Instructions"
-
+    initializeBottomPanel();
   }
 
   private void initializeButtons() {
@@ -60,11 +58,10 @@ public class GameGUI extends JFrame {
 
         if(symbol != 'B'){
           buttons[row][col].setText(String.valueOf(symbol));
+          buttons[row][col].setOpaque(true);
           if(symbol == 'X'){
-            buttons[row][col].setOpaque(true);
             buttons[row][col].setBackground(Color.RED);
           }else{
-            buttons[row][col].setOpaque(true);
             buttons[row][col].setBackground(Color.BLUE);
           }
           game.board[row][col] = symbol;
@@ -78,7 +75,6 @@ public class GameGUI extends JFrame {
 
           }
 
-
           if (game.checkWin()) {
             setTitle("ORDER WIN");
             colorWinningStreak();
@@ -91,7 +87,6 @@ public class GameGUI extends JFrame {
       }else {
         JOptionPane.showMessageDialog(null, "Cell already taken. Choose another one.");
       }
-
     }
   }
 
@@ -115,20 +110,10 @@ public class GameGUI extends JFrame {
     JPanel bottomPanel = new JPanel();
 
     JButton instructionsButton = new JButton("How to play");
-    instructionsButton.addActionListener(new ActionListener() {
-      @Override
-      public void actionPerformed(ActionEvent e) {
-        showInstructions();
-      }
-    });
+    instructionsButton.addActionListener(e -> showInstructions());
 
     JButton newGameButton = new JButton("New Game");
-    newGameButton.addActionListener(new ActionListener() {
-      @Override
-      public void actionPerformed(ActionEvent e) {
-        resetGame();
-      }
-    });
+    newGameButton.addActionListener(e -> resetGame());
 
     bottomPanel.add(instructionsButton);
     bottomPanel.add(newGameButton);
@@ -137,23 +122,14 @@ public class GameGUI extends JFrame {
     add(bottomPanel, BorderLayout.SOUTH);
   }
 
-  /*
-        System.out.println("""
-          Don't worry, it's simple! It's like tic-tac-toe but with a 6x6 board and two player: ORDER and CHAOS.\s
-          Both player can write down X or O. Order's goal is to make a 5 straight symbols horizontally, vertically or diagonally.\s
-          On the contrary Chaos to win has to avoid at any costs.\s""");
-   */
-
   private void showInstructions() {
-    // Aggiungi qui la logica per mostrare le istruzioni (puoi utilizzare un JOptionPane o un altro componente)
-    JOptionPane.showMessageDialog(this, "It's like tic-tac-toe but with a 6x6 board and two player: " +
-        "ORDER and CHAOS. \nBoth player can write down X or O. Order's goal is to make a 5 straight symbols horizontally," +
-        " vertically or diagonally. \nOn the contrary Chaos to win has to avoid at any costs." );
+    JOptionPane.showMessageDialog(this, """
+        It's like tic-tac-toe but with a 6x6 board and two player: ORDER and CHAOS.\s
+        Both player can write down X or O. Order's goal is to make a 5 straight symbols horizontally, vertically or diagonally.\s
+        On the contrary Chaos to win has to avoid at any costs.""");
   }
 
-
   private void resetGame() {
-
     int confirm = JOptionPane.showConfirmDialog(
         this,
         "Are you sure you want to start a new game?",
@@ -193,108 +169,3 @@ public class GameGUI extends JFrame {
     });
   }
 }
-
-
-
-/*
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
-public class GameGUI {
-
-  private static Game game;
-  private static JButton[][] gridButtons;
-  private static JButton xButton;
-  private static JButton oButton;
-
-  public GameGUI() {
-    game = new Game();
-
-    JFrame frame = new JFrame("Tic Tac Toe");
-    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    frame.setSize(600, 600);
-
-    JPanel mainPanel = new JPanel(new BorderLayout());
-
-    JPanel gridPanel = new JPanel(new GridLayout(6, 6));
-    gridButtons = new JButton[6][6];
-    for (int i = 0; i < 6; i++) {
-      for (int j = 0; j < 6; j++) {
-        JButton button = new JButton();
-        button.setPreferredSize(new Dimension(50, 50));
-        button.addActionListener(new ButtonClickListener(i, j));
-        gridButtons[i][j] = button;
-        gridPanel.add(button);
-      }
-    }
-
-    mainPanel.add(gridPanel, BorderLayout.CENTER);
-
-    JPanel symbolPanel = new JPanel();
-    xButton = new JButton("X");
-    oButton = new JButton("O");
-    xButton.addActionListener(new SymbolButtonClickListener('X'));
-    oButton.addActionListener(new SymbolButtonClickListener('O'));
-    symbolPanel.add(xButton);
-    symbolPanel.add(oButton);
-
-    mainPanel.add(symbolPanel, BorderLayout.SOUTH);
-
-    frame.getContentPane().add(mainPanel);
-
-    frame.setVisible(true);
-  }
-
-  private class ButtonClickListener implements ActionListener {
-    private int row;
-    private int col;
-
-    public ButtonClickListener(int row, int col) {
-      this.row = row;
-      this.col = col;
-    }
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
-      if (game.isCellFree(row, col)) {
-        updateGrid(game.getBoard());
-        game.fillCell(row, col, ' ');  // Inizializza con uno spazio vuoto
-      }
-    }
-  }
-
-  private class SymbolButtonClickListener implements ActionListener {
-    char symbol;
-    public SymbolButtonClickListener(char symbol) {
-      this.symbol = symbol;
-    }
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
-      game.setSymbol(0, 0, symbol);
-    }
-  }
-
-  private void updateGrid(char[][] board) {
-    for (int i = 0; i < 6; i++) {
-      for (int j = 0; j < 6; j++) {
-        char symbol = board[i][j];
-        gridButtons[i][j].setText(symbol != ' ' ? String.valueOf(symbol) : "");
-        gridButtons[i][j].setEnabled(symbol == ' ');
-      }
-    }
-  }
-
-  public static void main(String[] args) {
-    SwingUtilities.invokeLater(new Runnable() {
-      @Override
-      public void run() {
-        new GameGUI();
-      }
-    });
-  }
-}
-
-*/

@@ -13,7 +13,6 @@ public class Game {
   public boolean checkWin(){
 
     if(checkRow()){
-      System.out.println(winningStreak);
       return true;
     }
     if(checkCol()){
@@ -24,7 +23,6 @@ public class Game {
     }
 
     return false;
-
   }
 
   // check every row for 5 straight symbols
@@ -155,7 +153,5 @@ public class Game {
     }
     return false;
   }
-
-
 
 }
