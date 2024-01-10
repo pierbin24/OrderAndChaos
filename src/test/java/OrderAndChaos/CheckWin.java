@@ -8,6 +8,7 @@ import org.junit.jupiter.params.provider.CsvSource;
 
 import java.util.ArrayList;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class CheckWin {
@@ -152,6 +153,19 @@ public class CheckWin {
   public void testDiag2(int i, int j, int b) {
     game.board = testBoards.get(b);
     assertTrue(game.checkDiag2(i,j));
+  }
+
+  @Test
+  public void testChaosWin(){
+    game.board = new char[][]{
+        {'X', 'X', 'O', 'O', 'X', 'X'},
+        {'O', 'O', 'X', 'X', 'O', 'O'},
+        {'X', 'X', 'O', 'O', 'X', 'X'},
+        {'O', 'O', 'X', 'X', 'O', 'O'},
+        {'X', 'X', 'O', 'O', 'X', 'X'},
+        {'O', 'O', 'X', 'X', 'O', 'O'},
+    };
+    assertFalse(game.checkWin());
   }
 
 }
