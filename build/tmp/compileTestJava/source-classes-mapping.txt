@@ -1,2 +1,2 @@
-OrderAndChaos/CheckWin.java
- OrderAndChaos.CheckWin
+OrderAndChaos/TestCheckWin.java
+ OrderAndChaos.TestCheckWin

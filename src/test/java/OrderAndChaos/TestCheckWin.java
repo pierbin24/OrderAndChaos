@@ -9,12 +9,12 @@ import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.stream.Stream;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
-public class CheckWin {
+public class TestCheckWin {
 
   Game game;
   char[][] board;
@@ -196,12 +196,38 @@ public class CheckWin {
 
   @ParameterizedTest
   @CsvSource({
-      "0,2,1,2,2,2,3,2,4,2,5",
-      "1,1,0,1,1,1,2,1,3,1,4",
-      "2,0,0,1,1,2,2,3,3,4,4",
+      "2,1,2,2,2,3,2,4,2,5",
+      "1,0,1,1,1,2,1,3,1,4",
+      "0,0,1,1,2,2,3,3,4,4",
   })
-  public void testWinningStreak(){
+  public void testWinningStreak(String streak){
 
+
+    ArrayList<Integer> expectedList = new ArrayList<>();
+
+
+    // Implementa la logica del test utilizzando expectedList
+    // ...
+
+    for(int i = 0; i < 3; i++){
+      game.board = testBoards.get(i);
+      game.checkWin();
+      assertEquals(expectedList, game.winningStreak);
+    }
+
+  }
+
+
+
+  private List<Integer> parseSequence(String sequence) {
+    String[] tokens = sequence.split(",");
+    List<Integer> result = new ArrayList<>();
+
+    for (String token : tokens) {
+      result.add(Integer.parseInt(token));
+    }
+
+    return result;
   }
 
 
