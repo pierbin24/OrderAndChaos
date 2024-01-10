@@ -1,2 +1,2 @@
-OrderAndChaos/MakeTurn.java
- OrderAndChaos.MakeTurn
+OrderAndChaos/CheckWin.java
+ OrderAndChaos.CheckWin

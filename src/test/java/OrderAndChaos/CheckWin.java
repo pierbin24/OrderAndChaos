@@ -151,7 +151,7 @@ public class CheckWin {
   })
   public void testDiag2(int i, int j, int b) {
     game.board = testBoards.get(b);
-    assertTrue(game.checkDiag1(i,j));
+    assertTrue(game.checkDiag2(i,j));
   }
 
 }

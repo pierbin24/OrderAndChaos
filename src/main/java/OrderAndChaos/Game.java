@@ -89,12 +89,15 @@ public class Game {
       return true;
     }
     if(checkDiag2(1,4)){
+      System.out.println("1,4");
       return true;
     }
     if(checkDiag2(1,3)){
+      System.out.println("1,3");
       return true;
     }
     if(checkDiag2(2,4)){
+      System.out.println("2,4");
       return true;
     }
 
