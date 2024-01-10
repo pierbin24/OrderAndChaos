@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="OrderAndChaos.CheckWin" tests="9" skipped="0" failures="0" errors="0" timestamp="2024-01-10T00:45:39" hostname="pier.station" time="0.124">
+  <properties/>
+  <testcase name="testChaosWin()" classname="OrderAndChaos.CheckWin" time="0.015"/>
+  <testcase name="testCheckCol()" classname="OrderAndChaos.CheckWin" time="0.002"/>
+  <testcase name="testCheckRow()" classname="OrderAndChaos.CheckWin" time="0.003"/>
+  <testcase name="[1] 1, 1, 2" classname="OrderAndChaos.CheckWin" time="0.025"/>
+  <testcase name="[2] 1, 2, 3" classname="OrderAndChaos.CheckWin" time="0.001"/>
+  <testcase name="[3] 2, 1, 4" classname="OrderAndChaos.CheckWin" time="0.001"/>
+  <testcase name="[1] 1, 4, 5" classname="OrderAndChaos.CheckWin" time="0.001"/>
+  <testcase name="[2] 1, 3, 6" classname="OrderAndChaos.CheckWin" time="0.004"/>
+  <testcase name="[3] 2, 4, 7" classname="OrderAndChaos.CheckWin" time="0.001"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
