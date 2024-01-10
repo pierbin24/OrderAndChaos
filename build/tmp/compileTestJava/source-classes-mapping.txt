@@ -1,4 +1,2 @@
-OrderAndChaos/GUITest.java
- OrderAndChaos.GUITest
 OrderAndChaos/CheckWin.java
  OrderAndChaos.CheckWin

@@ -1,22 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="OrderAndChaos.CheckWin" tests="17" skipped="0" failures="0" errors="0" timestamp="2024-01-10T17:31:18" hostname="pier.station" time="0.225">
+<testsuite name="OrderAndChaos.CheckWin" tests="20" skipped="0" failures="0" errors="0" timestamp="2024-01-10T17:37:51" hostname="pier.station" time="0.19">
   <properties/>
-  <testcase name="testChaosWin()" classname="OrderAndChaos.CheckWin" time="0.008"/>
-  <testcase name="testCheckCol()" classname="OrderAndChaos.CheckWin" time="0.003"/>
-  <testcase name="testCheckRow()" classname="OrderAndChaos.CheckWin" time="0.016"/>
-  <testcase name="[1] 1, 1, 2" classname="OrderAndChaos.CheckWin" time="0.033"/>
+  <testcase name="testChaosWin()" classname="OrderAndChaos.CheckWin" time="0.012"/>
+  <testcase name="testCheckCol()" classname="OrderAndChaos.CheckWin" time="0.002"/>
+  <testcase name="testCheckRow()" classname="OrderAndChaos.CheckWin" time="0.003"/>
+  <testcase name="[1] 1, 1, 2" classname="OrderAndChaos.CheckWin" time="0.029"/>
   <testcase name="[2] 1, 2, 3" classname="OrderAndChaos.CheckWin" time="0.001"/>
-  <testcase name="[3] 2, 1, 4" classname="OrderAndChaos.CheckWin" time="0.001"/>
-  <testcase name="[1] 1, 4, 5" classname="OrderAndChaos.CheckWin" time="0.003"/>
-  <testcase name="[2] 1, 3, 6" classname="OrderAndChaos.CheckWin" time="0.002"/>
+  <testcase name="[3] 2, 1, 4" classname="OrderAndChaos.CheckWin" time="0.002"/>
+  <testcase name="[1] 1, 4, 5" classname="OrderAndChaos.CheckWin" time="0.002"/>
+  <testcase name="[2] 1, 3, 6" classname="OrderAndChaos.CheckWin" time="0.0"/>
   <testcase name="[3] 2, 4, 7" classname="OrderAndChaos.CheckWin" time="0.003"/>
+  <testcase name="[1] " classname="OrderAndChaos.CheckWin" time="0.002"/>
+  <testcase name="[2] " classname="OrderAndChaos.CheckWin" time="0.001"/>
+  <testcase name="[3] " classname="OrderAndChaos.CheckWin" time="0.001"/>
   <testcase name="[1] [[ ,  ,  ,  ,  ,  ], [ ,  ,  ,  ,  ,  ], [ , X, X, X, X, X], [ ,  ,  ,  ,  ,  ], [ ,  ,  ,  ,  ,  ], [ ,  ,  ,  ,  ,  ]]" classname="OrderAndChaos.CheckWin" time="0.001"/>
-  <testcase name="[2] [[ , O,  ,  ,  ,  ], [ , O,  ,  ,  ,  ], [ , O,  ,  ,  ,  ], [ , O,  ,  ,  ,  ], [ , O,  ,  ,  ,  ], [ , O,  ,  ,  ,  ]]" classname="OrderAndChaos.CheckWin" time="0.001"/>
-  <testcase name="[3] [[X,  ,  ,  ,  ,  ], [ , X,  ,  ,  ,  ], [ ,  , X,  ,  ,  ], [ ,  ,  , X,  ,  ], [ ,  ,  ,  , X,  ], [ ,  ,  ,  ,  ,  ]]" classname="OrderAndChaos.CheckWin" time="0.001"/>
+  <testcase name="[2] [[ , O,  ,  ,  ,  ], [ , O,  ,  ,  ,  ], [ , O,  ,  ,  ,  ], [ , O,  ,  ,  ,  ], [ , O,  ,  ,  ,  ], [ ,  ,  ,  ,  ,  ]]" classname="OrderAndChaos.CheckWin" time="0.001"/>
+  <testcase name="[3] [[X,  ,  ,  ,  ,  ], [ , X,  ,  ,  ,  ], [ ,  , X,  ,  ,  ], [ ,  ,  , X,  ,  ], [ ,  ,  ,  , X,  ], [ ,  ,  ,  ,  ,  ]]" classname="OrderAndChaos.CheckWin" time="0.002"/>
   <testcase name="[4] [[ , O,  ,  ,  ,  ], [ ,  , O,  ,  ,  ], [ ,  ,  , O,  ,  ], [ ,  ,  ,  , O,  ], [ ,  ,  ,  ,  , O], [ ,  ,  ,  ,  ,  ]]" classname="OrderAndChaos.CheckWin" time="0.001"/>
-  <testcase name="[5] [[ ,  ,  ,  ,  ,  ], [O,  ,  ,  ,  ,  ], [ , O,  ,  ,  ,  ], [ ,  , O,  ,  ,  ], [ ,  ,  , O,  ,  ], [ ,  ,  ,  , O,  ]]" classname="OrderAndChaos.CheckWin" time="0.001"/>
+  <testcase name="[5] [[ ,  ,  ,  ,  ,  ], [O,  ,  ,  ,  ,  ], [ , O,  ,  ,  ,  ], [ ,  , O,  ,  ,  ], [ ,  ,  , O,  ,  ], [ ,  ,  ,  , O,  ]]" classname="OrderAndChaos.CheckWin" time="0.0"/>
   <testcase name="[6] [[ ,  ,  ,  ,  ,  ], [ ,  ,  ,  , X,  ], [ ,  ,  , X,  ,  ], [ ,  , X,  ,  ,  ], [ , X,  ,  ,  ,  ], [X,  ,  ,  ,  ,  ]]" classname="OrderAndChaos.CheckWin" time="0.001"/>
-  <testcase name="[7] [[ ,  ,  ,  , O,  ], [ ,  ,  , O,  ,  ], [ ,  , O,  ,  ,  ], [ , O,  ,  ,  ,  ], [O,  ,  ,  ,  ,  ], [ ,  ,  ,  ,  ,  ]]" classname="OrderAndChaos.CheckWin" time="0.001"/>
+  <testcase name="[7] [[ ,  ,  ,  , O,  ], [ ,  ,  , O,  ,  ], [ ,  , O,  ,  ,  ], [ , O,  ,  ,  ,  ], [O,  ,  ,  ,  ,  ], [ ,  ,  ,  ,  ,  ]]" classname="OrderAndChaos.CheckWin" time="0.002"/>
   <testcase name="[8] [[ ,  ,  ,  ,  ,  ], [ ,  ,  ,  ,  , O], [ ,  ,  ,  , O,  ], [ ,  ,  , O,  ,  ], [ ,  , O,  ,  ,  ], [ , O,  ,  ,  ,  ]]" classname="OrderAndChaos.CheckWin" time="0.001"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
