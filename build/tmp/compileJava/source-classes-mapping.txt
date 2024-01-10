@@ -1,7 +1,7 @@
 OrderAndChaos/GameSafe.java
  OrderAndChaos.GameSafe
-OrderAndChaos/Game.java
- OrderAndChaos.Game
 OrderAndChaos/GameGUI.java
  OrderAndChaos.GameGUI
  OrderAndChaos.GameGUI$ButtonClickListener
+OrderAndChaos/Game.java
+ OrderAndChaos.Game
