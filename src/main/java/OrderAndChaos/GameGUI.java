@@ -7,8 +7,8 @@ import java.awt.event.ActionListener;
 
 public class GameGUI extends JFrame {
 
-  private final JButton[][] buttons;
-  private final Game game;
+  public JButton[][] buttons;
+  public Game game;
   boolean player = true;
 
 
@@ -94,14 +94,11 @@ public class GameGUI extends JFrame {
     int choice = JOptionPane.showOptionDialog(null, "Choose your symbol:", "Symbol Selection",
         JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
 
-    //return (choice == 0) ? 'X' : 'O';
-
     return switch (choice) {
       case 1 -> 'X';
       case 2 -> 'O';
       default -> 'B';
     };
-
   }
 
   private void initializeBottomPanel() {
@@ -115,7 +112,6 @@ public class GameGUI extends JFrame {
 
     bottomPanel.add(instructionsButton);
     bottomPanel.add(newGameButton);
-
 
     add(bottomPanel, BorderLayout.SOUTH);
   }
@@ -136,14 +132,18 @@ public class GameGUI extends JFrame {
     );
 
     if (confirm == JOptionPane.YES_OPTION) {
-      game.freeSpace = 36;
-      setTitle("Order&Chaos - Order Turn");
-      for (int i = 0; i < 6; i++) {
-        for (int j = 0; j < 6; j++) {
-          buttons[i][j].setOpaque(false);
-          buttons[i][j].setText("");
-          game.board[i][j] = ' ';
-        }
+      clearBoard();
+    }
+  }
+
+  public void clearBoard(){
+    game.freeSpace = 36;
+    setTitle("Order&Chaos - Order Turn");
+    for (int i = 0; i < 6; i++) {
+      for (int j = 0; j < 6; j++) {
+        buttons[i][j].setOpaque(false);
+        buttons[i][j].setText("");
+        game.board[i][j] = ' ';
       }
     }
   }
