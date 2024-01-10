@@ -89,7 +89,7 @@ public class GameGUI extends JFrame {
   }
 
 
-  private char chooseSymbol() {
+  public char chooseSymbol() {
     String[] options = {"Back", "X", "O"};
     int choice = JOptionPane.showOptionDialog(null, "Choose your symbol:", "Symbol Selection",
         JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
@@ -127,7 +127,7 @@ public class GameGUI extends JFrame {
         On the contrary Chaos to win has to avoid at any costs.""");
   }
 
-  private void resetGame() {
+  public void resetGame() {
     int confirm = JOptionPane.showConfirmDialog(
         this,
         "Are you sure you want to start a new game?",
