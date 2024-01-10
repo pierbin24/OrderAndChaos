@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class TestCheckWin {
+public class TestGame {
 
   Game game;
   char[][] board;

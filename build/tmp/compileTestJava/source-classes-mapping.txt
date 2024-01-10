@@ -1,2 +1,2 @@
-OrderAndChaos/TestCheckWin.java
- OrderAndChaos.TestCheckWin
+OrderAndChaos/TestGame.java
+ OrderAndChaos.TestGame

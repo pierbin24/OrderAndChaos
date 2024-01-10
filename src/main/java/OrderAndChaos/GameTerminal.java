@@ -3,7 +3,7 @@ package OrderAndChaos;
 import java.util.Random;
 import java.util.Scanner;
 
-public class GameSafe {
+public class GameTerminal {
 
   //false - chaos / true - order
   private static boolean player = false;
@@ -12,7 +12,7 @@ public class GameSafe {
 
   public static void main(String... args) {
 
-    GameSafe game = new GameSafe();
+    GameTerminal game = new GameTerminal();
 
     //chaos test
     //fillBoard(game.board);
@@ -222,61 +222,6 @@ public class GameSafe {
     return false;
 
   }
-
-  //old version of checkRow/col
-  /*
-    // check every row for 5 straight symbols
-  public boolean checkRow(){
-
-    int length = board.length;
-    for (int i = 0; i < length; i++){
-      int straightSymbolCounter = 1;
-
-      for (int j = 1; j < length; j++) {
-        if((j >= 4 && straightSymbolCounter < 2)){
-          return false;
-        }else{
-          if ((board[i][j] == board[i][j - 1]) && (board[i][j] != ' ')) {
-            straightSymbolCounter++;
-            System.out.println(straightSymbolCounter);
-            if (straightSymbolCounter == 5) {
-              return true;
-            }
-          } else {
-            straightSymbolCounter = 1;
-          }
-        }
-      }
-    }
-    return false;
-  }
-
-  //check every col for 5 straight symbols
-  public boolean checkCol(){
-
-    int length = board.length;
-    for (int j = 0; j < length; j++){
-      int straightSymbolCounter = 1;
-      for (int i = 1; i < length; i++) {
-        if((i >= 4 && straightSymbolCounter < 2)){
-          return false;
-        }else{
-          if ((board[i][j] == board[i-1][j]) && (board[i][j] != ' ')) {
-            straightSymbolCounter++;
-            if (straightSymbolCounter == 5) {
-              return true;
-            }
-          } else {
-            straightSymbolCounter = 1;
-          }
-        }
-      }
-    }
-    return false;
-
-  }
-   */
-
 
   //to check che diagonal use two methods, the first for the for the main diagonal and the two secondary diagonals
   //that check from up left to down right, the second one for the same but opposite diagonals
