@@ -5,7 +5,8 @@ import java.util.ArrayList;
 public class Game {
 
   //false - chaos / true - order
-  public char[][] board = new char[6][6];
+  private final int size = 6;
+  public char[][] board = new char[size][size];
   public int freeSpace = 36;
   public ArrayList<Integer> winningStreak = new ArrayList<>();
 
@@ -28,10 +29,9 @@ public class Game {
   // check every row for 5 straight symbols
   public boolean checkRow(){
 
-    int length = board.length;
-    for (int i = 0; i < length; i++){
+    for (int i = 0; i < size; i++){
       int straightSymbolCounter = 1;
-      for (int j = 1; j < length; j++) {
+      for (int j = 1; j < size; j++) {
         if ((board[i][j] == board[i][j - 1]) && (board[i][j] != ' ')) {
           straightSymbolCounter++;
           winningStreak.add(i);
@@ -53,10 +53,9 @@ public class Game {
   //check every col for 5 straight symbols
   public boolean checkCol(){
 
-    int length = board.length;
-    for (int j = 0; j < length; j++){
+    for (int j = 0; j < size; j++){
       int straightSymbolCounter = 1;
-      for (int i = 1; i < length; i++) {
+      for (int i = 1; i < size; i++) {
         if ((board[i][j] == board[i-1][j]) && (board[i][j] != ' ')) {
           straightSymbolCounter++;
           winningStreak.add(i-1);
@@ -79,24 +78,23 @@ public class Game {
   //to check che diagonal use two methods, the first for the for the main diagonal and the two secondary diagonals
   //that check from up left to down right, the second one for the same but opposite diagonals
   private boolean checkDiag() {
-    int length = board.length;
 
-    if(checkDiag1(1,1,length)){
+    if(checkDiag1(1,1)){
       return true;
     }
-    if(checkDiag1(1,2,length)){
+    if(checkDiag1(1,2)){
       return true;
     }
-    if(checkDiag1(2,1,length)){
+    if(checkDiag1(2,1)){
       return true;
     }
-    if(checkDiag2(1,4,length)){
+    if(checkDiag2(1,4)){
       return true;
     }
-    if(checkDiag2(1,3,length)){
+    if(checkDiag2(1,3)){
       return true;
     }
-    if(checkDiag2(2,4,length)){
+    if(checkDiag2(2,4)){
       return true;
     }
 
@@ -104,10 +102,10 @@ public class Game {
     }
 
 
-  public boolean checkDiag1(int indexR, int indexC, int length){
+  public boolean checkDiag1(int indexR, int indexC){
 
       int straightSymbolCounter = 1;
-      for (int i = indexR, j = indexC; i < length && j < length; i++, j++) {
+      for (int i = indexR, j = indexC; i < size && j < size; i++, j++) {
           if (board[i][j] == ' ') {
             straightSymbolCounter = 1;
           } else {
@@ -129,10 +127,10 @@ public class Game {
     return false;
     }
 
-  public boolean checkDiag2(int indexR, int indexC, int length){
+  public boolean checkDiag2(int indexR, int indexC){
 
     int straightSymbolCounter = 1;
-    for (int i = indexR, j = indexC; i < length && j >= 0; i++, j--) {
+    for (int i = indexR, j = indexC; i < size && j >= 0; i++, j--) {
       if (board[i][j] == ' ') {
         straightSymbolCounter = 1;
       } else {

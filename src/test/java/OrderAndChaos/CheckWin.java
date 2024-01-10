@@ -1,7 +1,12 @@
 package OrderAndChaos;
 
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
+
+import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -9,19 +14,15 @@ public class CheckWin {
 
   Game game;
   char[][] board;
-
-  @BeforeEach
-  void setUp() {
-    game = new Game();
-    board = new char[6][6];
-  }
+  private static ArrayList<char[][]> testBoards = new ArrayList<>();
 
 
+  @BeforeAll
+  static void setUpBeforeAll(){
 
-  @Test
-  public void testCheckRow() {
-
-    game.board = new char[][]{
+    char[][] testBoard = new char[6][6];
+    //row
+    testBoard = new char[][]{
         {' ', ' ', ' ', ' ', ' ', ' '},
         {' ', ' ', ' ', ' ', ' ', ' '},
         {' ', 'X', 'X', 'X', 'X', 'X'},
@@ -29,28 +30,129 @@ public class CheckWin {
         {' ', ' ', ' ', ' ', ' ', ' '},
         {' ', ' ', ' ', ' ', ' ', ' '}
     };
+    testBoards.add(testBoard);
 
+    //col
+    testBoard = new char[][]{
+        {' ', 'O', ' ', ' ', ' ', ' '},
+        {' ', 'O', ' ', ' ', ' ', ' '},
+        {' ', 'O', ' ', ' ', ' ', ' '},
+        {' ', 'O', ' ', ' ', ' ', ' '},
+        {' ', 'O', ' ', ' ', ' ', ' '},
+        {' ', 'O', ' ', ' ', ' ', ' '}
+    };
+    testBoards.add(testBoard);
+
+    //diag1
+    testBoard = new char[][]{
+        {'X', ' ', ' ', ' ', ' ', ' '},
+        {' ', 'X', ' ', ' ', ' ', ' '},
+        {' ', ' ', 'X', ' ', ' ', ' '},
+        {' ', ' ', ' ', 'X', ' ', ' '},
+        {' ', ' ', ' ', ' ', 'X', ' '},
+        {' ', ' ', ' ', ' ', ' ', ' '}
+    };
+    testBoards.add(testBoard);
+
+    //diag1
+    testBoard = new char[][]{
+        {' ', 'O', ' ', ' ', ' ', ' '},
+        {' ', ' ', 'O', ' ', ' ', ' '},
+        {' ', ' ', ' ', 'O', ' ', ' '},
+        {' ', ' ', ' ', ' ', 'O', ' '},
+        {' ', ' ', ' ', ' ', ' ', 'O'},
+        {' ', ' ', ' ', ' ', ' ', ' '}
+    };
+    testBoards.add(testBoard);
+
+    //diag1
+    testBoard = new char[][]{
+        {' ', ' ', ' ', ' ', ' ', ' '},
+        {'O', ' ', ' ', ' ', ' ', ' '},
+        {' ', 'O', ' ', ' ', ' ', ' '},
+        {' ', ' ', 'O', ' ', ' ', ' '},
+        {' ', ' ', ' ', 'O', ' ', ' '},
+        {' ', ' ', ' ', ' ', 'O', ' '}
+    };
+    testBoards.add(testBoard);
+
+    //diag2
+    testBoard = new char[][]{
+        {' ', ' ', ' ', ' ', ' ', ' '},
+        {' ', ' ', ' ', ' ', 'X', ' '},
+        {' ', ' ', ' ', 'X', ' ', ' '},
+        {' ', ' ', 'X', ' ', ' ', ' '},
+        {' ', 'X', ' ', ' ', ' ', ' '},
+        {'X', ' ', ' ', ' ', ' ', ' '}
+    };
+    testBoards.add(testBoard);
+
+
+    //diag2
+    testBoard = new char[][]{
+        {' ', ' ', ' ', ' ', 'O', ' '},
+        {' ', ' ', ' ', 'O', ' ', ' '},
+        {' ', ' ', 'O', ' ', ' ', ' '},
+        {' ', 'O', ' ', ' ', ' ', ' '},
+        {'O', ' ', ' ', ' ', ' ', ' '},
+        {' ', ' ', ' ', ' ', ' ', ' '}
+    };
+    testBoards.add(testBoard);
+
+    //diag2
+    testBoard = new char[][]{
+        {' ', ' ', ' ', ' ', ' ', ' '},
+        {' ', ' ', ' ', ' ', ' ', 'O'},
+        {' ', ' ', ' ', ' ', 'O', ' '},
+        {' ', ' ', ' ', 'O', ' ', ' '},
+        {' ', ' ', 'O', ' ', ' ', ' '},
+        {' ', 'O', ' ', ' ', ' ', ' '}
+    };
+    testBoards.add(testBoard);
+
+  }
+
+  @BeforeEach
+  void setUp() {
+    game = new Game();
+    board = new char[6][6];
+  }
+
+  @Test
+  public void testCheckRow() {
+    game.board = testBoards.get(0);
     assertTrue(game.checkRow());
   }
 
   @Test
   public void testCheckCol() {
-
-    game.board = new char[][]{
-        {' ', 'X', ' ', ' ', ' ', ' '},
-        {' ', 'X', ' ', ' ', ' ', ' '},
-        {' ', 'X', ' ', ' ', ' ', ' '},
-        {' ', 'X', ' ', ' ', ' ', ' '},
-        {' ', 'X', ' ', ' ', ' ', ' '},
-        {' ', 'X', ' ', ' ', ' ', ' '}
-    };
-
+    game.board = testBoards.get(1);
     assertTrue(game.checkCol());
   }
 
 
+  @ParameterizedTest
+  @CsvSource({
+      "1,1,2",
+      "1,2,3",
+      "2,1,4"
+  })
+  public void testDiag1(int i, int j, int b) {
+    game.board = testBoards.get(b);
+    assertTrue(game.checkDiag1(i,j));
+  }
 
 
+  @ParameterizedTest
+  @CsvSource({
+      "1,4,5",
+      "1,3,6",
+      "2,4,7"
+  })
+  public void testDiag2(int i, int j, int b) {
+    game.board = testBoards.get(b);
+    assertTrue(game.checkDiag1(i,j));
+  }
 
 }
 
