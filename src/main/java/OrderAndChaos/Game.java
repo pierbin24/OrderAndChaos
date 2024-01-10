@@ -14,7 +14,6 @@ public class Game {
   public boolean checkWin(){
 
     if(checkRow()){
-      System.out.println(winningStreak);
       return true;
     }
     if(checkCol()){

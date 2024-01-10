@@ -4,13 +4,10 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.CsvSource;
-import org.junit.jupiter.params.provider.MethodSource;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -18,13 +15,13 @@ public class TestCheckWin {
 
   Game game;
   char[][] board;
-  private static ArrayList<char[][]> testBoards = new ArrayList<>();
+  private static final ArrayList<char[][]> testBoards = new ArrayList<>();
 
 
   @BeforeAll
   static void setUpBeforeAll(){
 
-    char[][] testBoard = new char[6][6];
+    char[][] testBoard;
     //row
     testBoard = new char[][]{
         {' ', ' ', ' ', ' ', ' ', ' '},
@@ -91,7 +88,6 @@ public class TestCheckWin {
     };
     testBoards.add(testBoard);
 
-
     //diag2
     testBoard = new char[][]{
         {' ', ' ', ' ', ' ', 'O', ' '},
@@ -116,20 +112,17 @@ public class TestCheckWin {
 
   }
 
-
   @BeforeEach
   void setUp() {
     game = new Game();
     board = new char[6][6];
   }
 
-
   @Test
   public void testCheckRow() {
     game.board = testBoards.get(0);
     assertTrue(game.checkRow());
   }
-
 
   @Test
   public void testCheckCol() {
@@ -162,21 +155,12 @@ public class TestCheckWin {
   }
 
 
-  @ParameterizedTest
-  @MethodSource("provideWinningTestCases")
-  public void testOrderWin(char[][] board) {
-    game.board = board;
-    assertTrue(game.checkWin());
-  }
-
-  private static Stream<Arguments> provideWinningTestCases() {
-    Stream.Builder<Arguments> builder = Stream.builder();
-
-    for (int i = 0; i < 8; i++) {
-      builder.add(Arguments.of((Object) testBoards.get(i)));
+  @Test
+  public void testOrderWin() {
+    for (char[][] testBoard : testBoards) {
+      game.board = testBoard;
+      assertTrue(game.checkWin());
     }
-
-    return builder.build();
   }
 
 
@@ -195,40 +179,20 @@ public class TestCheckWin {
 
 
   @ParameterizedTest
-  @CsvSource({
-      "2,1,2,2,2,3,2,4,2,5",
-      "1,0,1,1,1,2,1,3,1,4",
-      "0,0,1,1,2,2,3,3,4,4",
-  })
-  public void testWinningStreak(String streak){
+  @ValueSource(strings =
+      {"0,2,1,2,2,2,3,2,4,2,5",
+      "1,0,1,1,1,2,1,3,1,4,1",
+      "2,0,0,1,1,2,2,3,3,4,4",})
+  public void testWinningStreak(String streakCSV){
 
-
-    ArrayList<Integer> expectedList = new ArrayList<>();
-
-
-    // Implementa la logica del test utilizzando expectedList
-    // ...
-
-    for(int i = 0; i < 3; i++){
-      game.board = testBoards.get(i);
+    String[] streak = streakCSV.split(",");
+    ArrayList<Integer> expectedStreak = new ArrayList<>();
+    game.board = testBoards.get(Integer.parseInt(streak[0]));
+    for(int i = 1 ; i < streak.length; i++){
+      expectedStreak.add(Integer.valueOf(streak[i]));
+    }
       game.checkWin();
-      assertEquals(expectedList, game.winningStreak);
-    }
-
+      assertEquals(expectedStreak, game.winningStreak);
   }
-
-
-
-  private List<Integer> parseSequence(String sequence) {
-    String[] tokens = sequence.split(",");
-    List<Integer> result = new ArrayList<>();
-
-    for (String token : tokens) {
-      result.add(Integer.parseInt(token));
-    }
-
-    return result;
-  }
-
 
 }
