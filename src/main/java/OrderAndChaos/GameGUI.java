@@ -7,13 +7,13 @@ import java.awt.event.ActionListener;
 
 public class GameGUI extends JFrame {
 
-  public JButton[][] buttons;
-  public Game game;
+  private final JButton[][] buttons;
+  private final transient Game game;
   boolean player = true;
 
   public GameGUI() {
-    setTitle("Order&Chaos - Order Turn");
-    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    setTitle("Order&Chaos - Order's Turn");
+    setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     setSize(600, 600);
     setLocationRelativeTo(null);
 
@@ -34,7 +34,6 @@ public class GameGUI extends JFrame {
         buttons[i][j].addActionListener(new ButtonClickListener(i, j));
         panel.add(buttons[i][j]);
         Game.updateBoard(i, j, ' ');
-        //game.board[i][j] = ' ' ;
       }
     }
     add(panel);
@@ -63,21 +62,19 @@ public class GameGUI extends JFrame {
             buttons[row][col].setBackground(Color.BLUE);
           }
           Game.updateBoard(row, col, symbol);
-          //game.board[row][col] = symbol;
           Game.setFreeSpace(game.getFreeSpace() - 1);
-          //game.freeSpace--;
           player = !player;
 
           if(player){
-            setTitle("Order turn");
+            setTitle("Order's turn");
           }else{
-            setTitle("Chaos turn");
+            setTitle("Chaos's turn");
 
           }
 
           if (game.checkWin()) {
             setTitle("ORDER WIN");
-            colorWinningStreak();
+            colorStreak();
             JOptionPane.showMessageDialog(null, "What a game! Order wins!");
           } else if (game.getFreeSpace() == 0) {
             setTitle("CHAOS WIN");
@@ -86,6 +83,19 @@ public class GameGUI extends JFrame {
         }
       }else {
         JOptionPane.showMessageDialog(null, "Cell already taken. Choose another one.");
+      }
+    }
+
+
+    private void colorStreak(){
+
+      int row;
+      int col;
+
+      for(int i = 0 ; i < 10; i = i + 2){
+        row = game.getStreak(i);
+        col = game.getStreak(i+1);
+        buttons[row][col].setBackground(Color.GREEN);
       }
     }
   }
@@ -140,31 +150,17 @@ public class GameGUI extends JFrame {
 
   public void clearBoard(){
     Game.setFreeSpace(36);
-    //game.freeSpace = 36;
-    setTitle("Order&Chaos - Order Turn");
+    player = true;
+    setTitle("Order&Chaos - Order's Turn");
     for (int i = 0; i < 6; i++) {
       for (int j = 0; j < 6; j++) {
         buttons[i][j].setOpaque(false);
         buttons[i][j].setText("");
         Game.updateBoard(i, j, ' ');
-        //game.board[i][j] = ' ';
       }
     }
   }
 
-  private void colorWinningStreak(){
-
-    int row;
-    int col;
-
-    for(int i = 0 ; i < 10; i = i + 2){
-      row = game.getStreak(i);
-      col = game.getStreak(i+1);
-      //row = game.winningStreak.get(i);
-      //col = game.winningStreak.get(i+1);
-      buttons[row][col].setBackground(Color.GREEN);
-    }
-  }
 
   public static void main(String[] args) {
     SwingUtilities.invokeLater(() -> {
