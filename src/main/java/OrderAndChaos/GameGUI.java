@@ -166,4 +166,5 @@ public class GameGUI extends JFrame {
       game.setVisible(true);
     });
   }
+
 }
