@@ -158,8 +158,10 @@ public class GameGUI extends JFrame {
     int col;
 
     for(int i = 0 ; i < 10; i = i + 2){
-      row = game.winningStreak.get(i);
-      col = game.winningStreak.get(i+1);
+      row = game.getStreak(i);
+      col = game.getStreak(i+1);
+      //row = game.winningStreak.get(i);
+      //col = game.winningStreak.get(i+1);
       buttons[row][col].setBackground(Color.GREEN);
     }
   }

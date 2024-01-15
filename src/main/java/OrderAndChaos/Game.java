@@ -9,7 +9,7 @@ public class Game {
   private static final int SIZE = 6;
   private static char[][] board = new char[SIZE][SIZE];
   private static int freeSpace = 36;
-  public List<Integer> winningStreak = new ArrayList<>();
+  private static final List<Integer> STREAK = new ArrayList<>();
 
 
   public static void updateBoard(int i, int j, char c){
@@ -28,6 +28,13 @@ public class Game {
     freeSpace = value;
   }
 
+  public int getStreak (int i){
+    return STREAK.get(i);
+  }
+
+  public static List<Integer> getStreak(){
+    return STREAK;
+  }
 
 
   //check if the are five straight symbols for row, col and diag
@@ -54,15 +61,15 @@ public class Game {
       for (int j = 1; j < SIZE; j++) {
         if ((board[i][j] == board[i][j - 1]) && (board[i][j] != ' ')) {
           straightSymbolCounter++;
-          winningStreak.add(i);
-          winningStreak.add(j-1);
+          STREAK.add(i);
+          STREAK.add(j-1);
           if (straightSymbolCounter == 5) {
-            winningStreak.add(i);
-            winningStreak.add(j);
+            STREAK.add(i);
+            STREAK.add(j);
             return true;
           }
         } else {
-          winningStreak.clear();
+          STREAK.clear();
           straightSymbolCounter = 1;
         }
       }
@@ -78,15 +85,15 @@ public class Game {
       for (int i = 1; i < SIZE; i++) {
         if ((board[i][j] == board[i-1][j]) && (board[i][j] != ' ')) {
           straightSymbolCounter++;
-          winningStreak.add(i-1);
-          winningStreak.add(j);
+          STREAK.add(i-1);
+          STREAK.add(j);
           if (straightSymbolCounter == 5) {
-            winningStreak.add(i);
-            winningStreak.add(j);
+            STREAK.add(i);
+            STREAK.add(j);
             return true;
           }
         } else {
-          winningStreak.clear();
+          STREAK.clear();
           straightSymbolCounter = 1;
         }
       }
@@ -131,15 +138,15 @@ public class Game {
           } else {
             if (board[i][j] == board[i - 1][j - 1]) {
               straightSymbolCounter++;
-              winningStreak.add(i-1);
-              winningStreak.add(j-1);
+              STREAK.add(i-1);
+              STREAK.add(j-1);
               if (straightSymbolCounter == 5) {
-                winningStreak.add(i);
-                winningStreak.add(j);
+                STREAK.add(i);
+                STREAK.add(j);
                 return true;
               }
             } else {
-              winningStreak.clear();
+              STREAK.clear();
               straightSymbolCounter = 1;
             }
           }
@@ -156,15 +163,15 @@ public class Game {
       } else {
         if (board[i][j] == board[i - 1][j + 1]) {
           straightSymbolCounter++;
-          winningStreak.add(i-1);
-          winningStreak.add(j+1);
+          STREAK.add(i-1);
+          STREAK.add(j+1);
           if (straightSymbolCounter == 5) {
-            winningStreak.add(i);
-            winningStreak.add(j);
+            STREAK.add(i);
+            STREAK.add(j);
             return true;
           }
         } else {
-          winningStreak.clear();
+          STREAK.clear();
           straightSymbolCounter = 1;
         }
       }

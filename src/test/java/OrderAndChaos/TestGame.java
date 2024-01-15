@@ -120,14 +120,14 @@ public class TestGame {
 
   @Test
   public void testCheckRow() {
-    game.uploadBoard(testBoards.get(0));
+    Game.uploadBoard(testBoards.get(0));
     //game.board = testBoards.get(0);
     assertTrue(game.checkRow());
   }
 
   @Test
   public void testCheckCol() {
-    game.uploadBoard(testBoards.get(1));
+    Game.uploadBoard(testBoards.get(1));
     //game.board = testBoards.get(1);
     assertTrue(game.checkCol());
   }
@@ -140,7 +140,7 @@ public class TestGame {
       "2,1,4"
   })
   public void testDiag1(int i, int j, int b) {
-    game.uploadBoard(testBoards.get(b));
+    Game.uploadBoard(testBoards.get(b));
     //game.board = testBoards.get(b);
     assertTrue(game.checkDiag1(i,j));
   }
@@ -153,7 +153,7 @@ public class TestGame {
       "2,4,7"
   })
   public void testDiag2(int i, int j, int b) {
-    game.uploadBoard(testBoards.get(b));
+    Game.uploadBoard(testBoards.get(b));
     //game.board = testBoards.get(b);
     assertTrue(game.checkDiag2(i,j));
   }
@@ -162,7 +162,7 @@ public class TestGame {
   @Test
   public void testOrderWin() {
     for (char[][] testBoard : testBoards) {
-      game.uploadBoard(testBoard);
+      Game.uploadBoard(testBoard);
       //game.board = testBoard;
       assertTrue(game.checkWin());
     }
@@ -172,7 +172,7 @@ public class TestGame {
   @Test
   public void testChaosWin(){
 
-    game.uploadBoard(new char[][]{
+    Game.uploadBoard(new char[][]{
         {'X', 'X', 'O', 'O', 'X', 'X'},
         {'O', 'O', 'X', 'X', 'O', 'O'},
         {'X', 'X', 'O', 'O', 'X', 'X'},
@@ -204,12 +204,12 @@ public class TestGame {
 
     String[] streak = streakCSV.split(",");
     ArrayList<Integer> expectedStreak = new ArrayList<>();
-    game.uploadBoard(testBoards.get(Integer.parseInt(streak[0])));
+    Game.uploadBoard(testBoards.get(Integer.parseInt(streak[0])));
     //game.board = testBoards.get(Integer.parseInt(streak[0]));
     for(int i = 1 ; i < streak.length; i++){
       expectedStreak.add(Integer.valueOf(streak[i]));
     }
       game.checkWin();
-      assertEquals(expectedStreak, game.winningStreak);
+      assertEquals(expectedStreak, Game.getStreak());
   }
 }
