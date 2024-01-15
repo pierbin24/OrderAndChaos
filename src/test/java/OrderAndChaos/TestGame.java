@@ -212,5 +212,4 @@ public class TestGame {
       game.checkWin();
       assertEquals(expectedStreak, game.winningStreak);
   }
-
 }
