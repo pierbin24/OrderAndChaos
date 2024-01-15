@@ -11,7 +11,6 @@ public class GameGUI extends JFrame {
   public Game game;
   boolean player = true;
 
-
   public GameGUI() {
     setTitle("Order&Chaos - Order Turn");
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
