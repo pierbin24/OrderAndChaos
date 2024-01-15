@@ -1,21 +1,22 @@
 package OrderAndChaos;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Game {
 
   //false - chaos / true - order
-  private final static int SIZE = 6;
+  private static final int SIZE = 6;
   private static char[][] board = new char[SIZE][SIZE];
   private static int freeSpace = 36;
-  public ArrayList<Integer> winningStreak = new ArrayList<>();
+  public List<Integer> winningStreak = new ArrayList<>();
 
 
-  public void updateBoard(int i, int j, char c){
+  public static void updateBoard(int i, int j, char c){
     board[i][j] = c;
   }
 
-  public void uploadBoard(char[][] testBoard){
+  public static void uploadBoard(char[][] testBoard){
     board = testBoard;
   }
 
@@ -23,7 +24,7 @@ public class Game {
     return freeSpace;
   }
 
-  public void setFreeSpace(int value){
+  public static void setFreeSpace(int value){
     freeSpace = value;
   }
 

@@ -33,7 +33,7 @@ public class GameGUI extends JFrame {
         buttons[i][j].setFont(new Font("Arial", Font.PLAIN, 40));
         buttons[i][j].addActionListener(new ButtonClickListener(i, j));
         panel.add(buttons[i][j]);
-        game.updateBoard(i, j, ' ');
+        Game.updateBoard(i, j, ' ');
         //game.board[i][j] = ' ' ;
       }
     }
@@ -62,9 +62,9 @@ public class GameGUI extends JFrame {
           }else{
             buttons[row][col].setBackground(Color.BLUE);
           }
-          game.updateBoard(row, col, symbol);
+          Game.updateBoard(row, col, symbol);
           //game.board[row][col] = symbol;
-          game.setFreeSpace(game.getFreeSpace() - 1);
+          Game.setFreeSpace(game.getFreeSpace() - 1);
           //game.freeSpace--;
           player = !player;
 
@@ -139,14 +139,14 @@ public class GameGUI extends JFrame {
   }
 
   public void clearBoard(){
-    game.setFreeSpace(36);
+    Game.setFreeSpace(36);
     //game.freeSpace = 36;
     setTitle("Order&Chaos - Order Turn");
     for (int i = 0; i < 6; i++) {
       for (int j = 0; j < 6; j++) {
         buttons[i][j].setOpaque(false);
         buttons[i][j].setText("");
-        game.updateBoard(i, j, ' ');
+        Game.updateBoard(i, j, ' ');
         //game.board[i][j] = ' ';
       }
     }
