@@ -1,6 +1,6 @@
 language: java
 jdk:
-  - jdk17
+  - openjdk17
 
 install: ./gradlew assemble
 
