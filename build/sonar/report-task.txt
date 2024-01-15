@@ -2,5 +2,5 @@ projectKey=OrderAndChaos
 serverUrl=http://localhost:9000
 serverVersion=10.3.0.82913
 dashboardUrl=http://localhost:9000/dashboard?id=OrderAndChaos
-ceTaskId=AY0OAQwJWlQ1MGkEIq5r
-ceTaskUrl=http://localhost:9000/api/ce/task?id=AY0OAQwJWlQ1MGkEIq5r
+ceTaskId=AY0OO98QWlQ1MGkEIq5s
+ceTaskUrl=http://localhost:9000/api/ce/task?id=AY0OO98QWlQ1MGkEIq5s
