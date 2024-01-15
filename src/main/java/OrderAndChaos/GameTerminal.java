@@ -1,7 +1,12 @@
 package OrderAndChaos;
 
-import java.util.Random;
-import java.util.Scanner;
+
+public class GameTerminal {
+
+}
+
+/*
+
 
 public class GameTerminal {
 
@@ -43,27 +48,6 @@ public class GameTerminal {
 
     scanner.close();
   }
-
-  //player selection
-  /*
-    public boolean selectPlayer(){
-
-    Scanner scanner = new Scanner(System.in);
-    String player = scanner.nextLine().trim().toLowerCase();
-    boolean turn = true;
-    if(!player.equals("o")){
-      if(player.equals("c")){
-        turn = false;
-      }else{
-        System.out.println("There is a typo, answer with a 'o' for Order o 'c' for Chaos");
-        selectPlayer();
-      }
-    }
-    return turn;
-  }
-   */
-
-
 
   public void newGame(){
 
@@ -293,9 +277,8 @@ public class GameTerminal {
 
   public void endGame(String winner){
 
-    Random random = new Random();
-    int numb = random.nextInt(5) + 1;
-
+    SecureRandom secureRandom = new SecureRandom();
+    int numb = secureRandom.nextInt(5)+1;
 
     switch (numb) {
       case 1 -> System.out.println("Wow, that was truly a wild game, but in the end, " + winner + " emerged victorious!.");
@@ -330,3 +313,6 @@ public class GameTerminal {
 
 
 
+
+
+ */
