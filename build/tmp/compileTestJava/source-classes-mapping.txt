@@ -1,2 +1,0 @@
-OrderAndChaos/TestGame.java
- OrderAndChaos.TestGame
