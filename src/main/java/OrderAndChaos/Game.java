@@ -5,10 +5,21 @@ import java.util.ArrayList;
 public class Game {
 
   //false - chaos / true - order
-  private final int size = 6;
-  public char[][] board = new char[size][size];
+  private final static int size = 6;
+  private static char[][] board = new char[size][size];
   public int freeSpace = 36;
   public ArrayList<Integer> winningStreak = new ArrayList<>();
+
+
+  public void updateBoard(int i, int j, char c){
+    board[i][j] = c;
+  }
+
+  public void uploadBoard(char[][] testBoard){
+    board = testBoard;
+  }
+
+
 
   //check if the are five straight symbols for row, col and diag
   public boolean checkWin(){

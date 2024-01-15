@@ -120,13 +120,15 @@ public class TestGame {
 
   @Test
   public void testCheckRow() {
-    game.board = testBoards.get(0);
+    game.uploadBoard(testBoards.get(0));
+    //game.board = testBoards.get(0);
     assertTrue(game.checkRow());
   }
 
   @Test
   public void testCheckCol() {
-    game.board = testBoards.get(1);
+    game.uploadBoard(testBoards.get(1));
+    //game.board = testBoards.get(1);
     assertTrue(game.checkCol());
   }
 
@@ -138,7 +140,8 @@ public class TestGame {
       "2,1,4"
   })
   public void testDiag1(int i, int j, int b) {
-    game.board = testBoards.get(b);
+    game.uploadBoard(testBoards.get(b));
+    //game.board = testBoards.get(b);
     assertTrue(game.checkDiag1(i,j));
   }
 
@@ -150,7 +153,8 @@ public class TestGame {
       "2,4,7"
   })
   public void testDiag2(int i, int j, int b) {
-    game.board = testBoards.get(b);
+    game.uploadBoard(testBoards.get(b));
+    //game.board = testBoards.get(b);
     assertTrue(game.checkDiag2(i,j));
   }
 
@@ -158,7 +162,8 @@ public class TestGame {
   @Test
   public void testOrderWin() {
     for (char[][] testBoard : testBoards) {
-      game.board = testBoard;
+      game.uploadBoard(testBoard);
+      //game.board = testBoard;
       assertTrue(game.checkWin());
     }
   }
@@ -166,6 +171,16 @@ public class TestGame {
 
   @Test
   public void testChaosWin(){
+
+    game.uploadBoard(new char[][]{
+        {'X', 'X', 'O', 'O', 'X', 'X'},
+        {'O', 'O', 'X', 'X', 'O', 'O'},
+        {'X', 'X', 'O', 'O', 'X', 'X'},
+        {'O', 'O', 'X', 'X', 'O', 'O'},
+        {'X', 'X', 'O', 'O', 'X', 'X'},
+        {'O', 'O', 'X', 'X', 'O', 'O'},
+    });
+    /*
     game.board = new char[][]{
         {'X', 'X', 'O', 'O', 'X', 'X'},
         {'O', 'O', 'X', 'X', 'O', 'O'},
@@ -174,6 +189,8 @@ public class TestGame {
         {'X', 'X', 'O', 'O', 'X', 'X'},
         {'O', 'O', 'X', 'X', 'O', 'O'},
     };
+     */
+
     assertFalse(game.checkWin());
   }
 
@@ -187,7 +204,8 @@ public class TestGame {
 
     String[] streak = streakCSV.split(",");
     ArrayList<Integer> expectedStreak = new ArrayList<>();
-    game.board = testBoards.get(Integer.parseInt(streak[0]));
+    game.uploadBoard(testBoards.get(Integer.parseInt(streak[0])));
+    //game.board = testBoards.get(Integer.parseInt(streak[0]));
     for(int i = 1 ; i < streak.length; i++){
       expectedStreak.add(Integer.valueOf(streak[i]));
     }
