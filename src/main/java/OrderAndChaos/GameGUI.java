@@ -64,7 +64,8 @@ public class GameGUI extends JFrame {
           }
           game.updateBoard(row, col, symbol);
           //game.board[row][col] = symbol;
-          game.freeSpace--;
+          game.setFreeSpace(game.getFreeSpace() - 1);
+          //game.freeSpace--;
           player = !player;
 
           if(player){
@@ -78,7 +79,7 @@ public class GameGUI extends JFrame {
             setTitle("ORDER WIN");
             colorWinningStreak();
             JOptionPane.showMessageDialog(null, "What a game! Order wins!");
-          } else if (game.freeSpace == 0) {
+          } else if (game.getFreeSpace() == 0) {
             setTitle("CHAOS WIN");
             JOptionPane.showMessageDialog(null, "Wow! Chaos wins");
           }
@@ -138,7 +139,8 @@ public class GameGUI extends JFrame {
   }
 
   public void clearBoard(){
-    game.freeSpace = 36;
+    game.setFreeSpace(36);
+    //game.freeSpace = 36;
     setTitle("Order&Chaos - Order Turn");
     for (int i = 0; i < 6; i++) {
       for (int j = 0; j < 6; j++) {

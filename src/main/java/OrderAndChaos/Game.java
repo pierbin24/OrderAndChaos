@@ -5,9 +5,9 @@ import java.util.ArrayList;
 public class Game {
 
   //false - chaos / true - order
-  private final static int size = 6;
-  private static char[][] board = new char[size][size];
-  public int freeSpace = 36;
+  private final static int SIZE = 6;
+  private static char[][] board = new char[SIZE][SIZE];
+  private static int freeSpace = 36;
   public ArrayList<Integer> winningStreak = new ArrayList<>();
 
 
@@ -17,6 +17,14 @@ public class Game {
 
   public void uploadBoard(char[][] testBoard){
     board = testBoard;
+  }
+
+  public int getFreeSpace(){
+    return freeSpace;
+  }
+
+  public void setFreeSpace(int value){
+    freeSpace = value;
   }
 
 
@@ -40,9 +48,9 @@ public class Game {
   // check every row for 5 straight symbols
   public boolean checkRow(){
 
-    for (int i = 0; i < size; i++){
+    for (int i = 0; i < SIZE; i++){
       int straightSymbolCounter = 1;
-      for (int j = 1; j < size; j++) {
+      for (int j = 1; j < SIZE; j++) {
         if ((board[i][j] == board[i][j - 1]) && (board[i][j] != ' ')) {
           straightSymbolCounter++;
           winningStreak.add(i);
@@ -64,9 +72,9 @@ public class Game {
   //check every col for 5 straight symbols
   public boolean checkCol(){
 
-    for (int j = 0; j < size; j++){
+    for (int j = 0; j < SIZE; j++){
       int straightSymbolCounter = 1;
-      for (int i = 1; i < size; i++) {
+      for (int i = 1; i < SIZE; i++) {
         if ((board[i][j] == board[i-1][j]) && (board[i][j] != ' ')) {
           straightSymbolCounter++;
           winningStreak.add(i-1);
@@ -116,7 +124,7 @@ public class Game {
   public boolean checkDiag1(int indexR, int indexC){
 
       int straightSymbolCounter = 1;
-      for (int i = indexR, j = indexC; i < size && j < size; i++, j++) {
+      for (int i = indexR, j = indexC; i < SIZE && j < SIZE; i++, j++) {
           if (board[i][j] == ' ') {
             straightSymbolCounter = 1;
           } else {
@@ -141,7 +149,7 @@ public class Game {
   public boolean checkDiag2(int indexR, int indexC){
 
     int straightSymbolCounter = 1;
-    for (int i = indexR, j = indexC; i < size && j >= 0; i++, j--) {
+    for (int i = indexR, j = indexC; i < SIZE && j >= 0; i++, j--) {
       if (board[i][j] == ' ') {
         straightSymbolCounter = 1;
       } else {
