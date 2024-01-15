@@ -9,7 +9,8 @@ public class GameGUI extends JFrame {
 
   private final JButton[][] buttons;
   private final transient Game game;
-  boolean player = true;
+  private boolean player = true;
+  private boolean gameInProgress = true;
 
   public GameGUI() {
     setTitle("Order&Chaos - Order's Turn");
@@ -50,42 +51,47 @@ public class GameGUI extends JFrame {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-      if (buttons[row][col].getText().equals("")) {
-        char symbol = chooseSymbol();
 
-        if(symbol != 'B'){
-          buttons[row][col].setText(String.valueOf(symbol));
-          buttons[row][col].setOpaque(true);
-          if(symbol == 'X'){
-            buttons[row][col].setBackground(Color.RED);
-          }else{
-            buttons[row][col].setBackground(Color.BLUE);
+      if(gameInProgress){
+
+        if (buttons[row][col].getText().equals("")) {
+          char symbol = chooseSymbol();
+
+          if(symbol != 'B'){
+            buttons[row][col].setText(String.valueOf(symbol));
+            buttons[row][col].setOpaque(true);
+            if(symbol == 'X'){
+              buttons[row][col].setBackground(Color.RED);
+            }else{
+              buttons[row][col].setBackground(Color.BLUE);
+            }
+            Game.updateBoard(row, col, symbol);
+            Game.setFreeSpace(game.getFreeSpace() - 1);
+            player = !player;
+
+            if(player){
+              setTitle("Order's turn");
+            }else{
+              setTitle("Chaos's turn");
+
+            }
+
+            if (game.checkWin()) {
+              gameInProgress = false;
+              setTitle("ORDER WIN");
+              colorStreak();
+              JOptionPane.showMessageDialog(null, "What a game! Order wins!");
+            } else if (game.getFreeSpace() == 0) {
+              gameInProgress = false;
+              setTitle("CHAOS WIN");
+              JOptionPane.showMessageDialog(null, "Wow! Chaos wins");
+            }
           }
-          Game.updateBoard(row, col, symbol);
-          Game.setFreeSpace(game.getFreeSpace() - 1);
-          player = !player;
-
-          if(player){
-            setTitle("Order's turn");
-          }else{
-            setTitle("Chaos's turn");
-
-          }
-
-          if (game.checkWin()) {
-            setTitle("ORDER WIN");
-            colorStreak();
-            JOptionPane.showMessageDialog(null, "What a game! Order wins!");
-          } else if (game.getFreeSpace() == 0) {
-            setTitle("CHAOS WIN");
-            JOptionPane.showMessageDialog(null, "Wow! Chaos wins");
-          }
+        }else {
+          JOptionPane.showMessageDialog(null, "Cell already taken. Choose another one.");
         }
-      }else {
-        JOptionPane.showMessageDialog(null, "Cell already taken. Choose another one.");
       }
     }
-
 
     private void colorStreak(){
 
@@ -149,6 +155,7 @@ public class GameGUI extends JFrame {
   }
 
   public void clearBoard(){
+    gameInProgress = true;
     Game.setFreeSpace(36);
     player = true;
     setTitle("Order&Chaos - Order's Turn");
