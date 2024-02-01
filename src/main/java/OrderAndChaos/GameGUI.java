@@ -34,7 +34,8 @@ public class GameGUI extends JFrame {
         buttons[i][j].setFont(new Font("Arial", Font.PLAIN, 40));
         buttons[i][j].addActionListener(new ButtonClickListener(i, j));
         panel.add(buttons[i][j]);
-        Game.updateBoard(i, j, ' ');
+        //Game.updateBoard(i, j, ' ');
+        game.updateBoard(i, j, ' ');
       }
     }
     add(panel);
@@ -65,7 +66,8 @@ public class GameGUI extends JFrame {
             }else{
               buttons[row][col].setBackground(Color.BLUE);
             }
-            Game.updateBoard(row, col, symbol);
+            //Game.updateBoard(row, col, symbol);
+            game.updateBoard(row, col, symbol);
             Game.setFreeSpace(game.getFreeSpace() - 1);
             player = !player;
 
@@ -163,7 +165,9 @@ public class GameGUI extends JFrame {
       for (int j = 0; j < 6; j++) {
         buttons[i][j].setOpaque(false);
         buttons[i][j].setText("");
-        Game.updateBoard(i, j, ' ');
+        game.updateBoard(i, j, ' ');
+
+        //Game.updateBoard(i, j, ' ');
       }
     }
   }

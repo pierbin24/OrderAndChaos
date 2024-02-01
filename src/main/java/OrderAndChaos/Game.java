@@ -12,7 +12,7 @@ public class Game {
   private static final List<Integer> STREAK = new ArrayList<>();
 
 
-  public static void updateBoard(int i, int j, char c){
+  public void updateBoard(int i, int j, char c){
     board[i][j] = c;
   }
 
